@@ -1,7 +1,7 @@
-name: "Cite_seq-analysis"
+name: Cite_seq-analysis
 output_dir: ../docs
 navbar:
-  title: "Cite_seq-analysis"
+  title: Cite_seq-analysis
   left:
   - text: Home
     href: index.html
@@ -9,6 +9,10 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  right:
+  - icon: fab fa-github
+    text: Source code
+    href: https://github.com/myname/Cite_seq-analysis
 output:
   workflowr::wflow_html:
     toc: yes
