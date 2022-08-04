@@ -14,9 +14,11 @@ knitr::opts_chunk$set(message = F,warning = F)
 ```
 
 ```{r eval=T}
-library(pdftools)
 library(Seurat)
 library(SeuratObject)
+library(future)
+library(ggplot2)
+library(tidyverse)
 library(harmony)
 ```
 
@@ -74,13 +76,173 @@ Singlet_total_PBMC <- FindClusters(Singlet_total_PBMC, resolution = 0.2, verbose
 Singlet_total_PBMC <- RunUMAP(Singlet_total_PBMC,dims = 1:20)
 ```
 
-```{r eval=T, include=T}
+```{r echo=TRUE}
 Singlet_total_PBMC<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_PBMC.rds")
 #pdf("/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf",width = 18,height = 12)
-```
-
-
-
-```{r}
 DimPlot(Singlet_total_PBMC,reduction = "umap",group.by = "PBMC_pool_index",raster=FALSE)
+#dev.off()
+DimPlot(Singlet_total_PBMC,reduction = "umap",label = T,raster=FALSE)
+#table(Singlet_total_PBMC@meta.data[["PBMC_pool_index"]])
 ```
+
+## 0407
+```{r eval=FALSE, include=FALSE}
+##0407
+Singlet_total_0407 <- merge(Singlet_0407_1_add1,c(Singlet_0407_2_add1,Singlet_0407_3_add1,Singlet_0407_4_add1),add.cell.ids = c("0407_1","0407_2","0407_3","0407_4"))
+Pool_index_0407 <- substr(colnames(Singlet_total_0407),1,6)
+Singlet_total_0407@meta.data[["Pool_index_0407"]] <- Pool_index_0407
+```
+
+### WNN
+```{r eval=FALSE, include=FALSE}
+##WNN
+DefaultAssay(Singlet_total_0407) <- 'RNA'
+Singlet_total_0407 <- NormalizeData(Singlet_total_0407) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA()
+
+DefaultAssay(Singlet_total_0407) <- 'ADT'
+# we will use all ADT features for dimensional reduction
+# we set a dimensional reduction name to avoid overwriting the 
+VariableFeatures(Singlet_total_0407) <- rownames(Singlet_total_0407[["ADT"]])
+Singlet_total_0407 <- NormalizeData(Singlet_total_0407, normalization.method = 'CLR', margin = 2) %>% 
+  ScaleData() %>% RunPCA(reduction.name = 'apca')
+Singlet_total_0407 <- FindMultiModalNeighbors(
+  Singlet_total_0407, reduction.list = list("pca", "apca"), 
+  dims.list = list(1:30, 1:18), modality.weight.name = "RNA.weight"
+)
+
+Singlet_total_0407 <- RunUMAP(Singlet_total_0407, nn.name = "weighted.nn", reduction.name = "wnn.umap", reduction.key = "wnnUMAP_")
+
+Singlet_total_0407 <- FindClusters(Singlet_total_0407, graph.name = "wsnn", algorithm = 3, resolution = 0.2, verbose = FALSE)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+DimPlot(Singlet_total_0407,reduction = "wnn.umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_WNN_UMAP")
+DimPlot(Singlet_total_0407,reduction = "wnn.umap",label = T,raster=FALSE)+ggtitle("0407_WNN_UMAP_cluster")
+```
+
+### RNA
+```{r eval=FALSE, include=FALSE}
+##RNA cluster
+Singlet_total_0407@active.assay <- "RNA"
+
+# Select the top 1000 most variable features
+Singlet_total_0407 <- FindVariableFeatures(Singlet_total_0407)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0407 <- ScaleData(Singlet_total_0407, features = VariableFeatures(Singlet_total_0407))
+
+# Run PCA
+Singlet_total_0407 <- RunPCA(Singlet_total_0407,features = VariableFeatures(Singlet_total_0407))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0407 <- FindNeighbors(Singlet_total_0407, reduction = "pca", dims = 1:20)
+Singlet_total_0407 <- FindClusters(Singlet_total_0407, resolution = 0.2, verbose = FALSE)
+Singlet_total_0407 <- RunUMAP(Singlet_total_0407,dims = 1:20)
+```
+
+
+```{r eval=FALSE, fig.height=18, fig.width=24, include=FALSE}
+png("/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png",width = 2400,height = 1800)
+DimPlot(Singlet_total_0407,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
+dev.off()
+
+#DimPlot(Singlet_total_0407,reduction = "umap",label = T,raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
+```
+![](images/0407_RNA_cluster_Dimplot.png)
+
+```{r eval=FALSE, include=FALSE}
+##去掉cluster1的细胞
+Singlet_total_0407_decorrect<- Singlet_total_0407[,Singlet_total_0407@meta.data[["RNA_snn_res.0.2"]]!="2"]
+```
+
+
+```{r eval=FALSE, include=FALSE}
+Singlet_total_0407_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407_decorrect.rds")
+DimPlot(Singlet_total_0407_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("RNA_UMAP_cluster_decorrect")
+DimPlot(Singlet_total_0407_decorrect,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
+table(Singlet_total_0407_decorrect@meta.data[["Pool_index_0407"]])
+```
+
+## 0410 A
+```{r eval=FALSE, include=FALSE}
+##0410A
+Singlet_total_0410A <- merge(Singlet_0410_A1_add1,c(Singlet_0410_A3_add1,Singlet_0410_A4_add1),add.cell.ids = c("0410_A1","0410_A3","0410_A4"))
+Pool_index_0410A <- substr(colnames(Singlet_total_0410A),1,7)
+Singlet_total_0410A@meta.data[["Pool_index_0410A"]] <- Pool_index_0410A
+```
+
+### WNN
+```{r eval=FALSE, include=FALSE}
+##WNN
+DefaultAssay(Singlet_total_0410A) <- 'RNA'
+Singlet_total_0410A <- NormalizeData(Singlet_total_0410A) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA()
+
+DefaultAssay(Singlet_total_0410A) <- 'ADT'
+# we will use all ADT features for dimensional reduction
+# we set a dimensional reduction name to avoid overwriting the 
+VariableFeatures(Singlet_total_0410A) <- rownames(Singlet_total_0410A[["ADT"]])
+Singlet_total_0410A <- NormalizeData(Singlet_total_0410A, normalization.method = 'CLR', margin = 2) %>% 
+  ScaleData() %>% RunPCA(reduction.name = 'apca')
+Singlet_total_0410A <- FindMultiModalNeighbors(
+  Singlet_total_0410A, reduction.list = list("pca", "apca"), 
+  dims.list = list(1:30, 1:18), modality.weight.name = "RNA.weight"
+)
+
+Singlet_total_0410A <- RunUMAP(Singlet_total_0410A, nn.name = "weighted.nn", reduction.name = "wnn.umap", reduction.key = "wnnUMAP_")
+
+Singlet_total_0410A <- FindClusters(Singlet_total_0410A, graph.name = "wsnn", algorithm = 3, resolution = 0.2, verbose = FALSE)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+DimPlot(Singlet_total_0410A,reduction = "wnn.umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("WNN_UMAP")
+DimPlot(Singlet_total_0410A,reduction = "wnn.umap",label = T,raster=FALSE)+ggtitle("WNN_UMAP_cluster")
+```
+
+### RNA
+```{r eval=FALSE, include=FALSE}
+##RNA cluster
+Singlet_total_0410A@active.assay <- "RNA"
+
+# Select the top 1000 most variable features
+Singlet_total_0410A <- FindVariableFeatures(Singlet_total_0410A)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0410A <- ScaleData(Singlet_total_0410A, features = VariableFeatures(Singlet_total_0410A))
+
+# Run PCA
+Singlet_total_0410A <- RunPCA(Singlet_total_0410A,features = VariableFeatures(Singlet_total_0410A))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0410A <- FindNeighbors(Singlet_total_0410A, reduction = "pca", dims = 1:20)
+Singlet_total_0410A <- FindClusters(Singlet_total_0410A, resolution = 0.2, verbose = FALSE)
+Singlet_total_0410A <- RunUMAP(Singlet_total_0410A,dims = 1:20)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+DimPlot(Singlet_total_0410A,reduction = "umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("RNA_UMAP")
+DimPlot(Singlet_total_0410A,reduction = "umap",label = T,raster=FALSE)+ggtitle("WNN_UMAP_clusster")
+
+table(Singlet_total_0410A@meta.data[["Pool_index_0410A"]])
+```
+
+
+```{r eval=FALSE, include=FALSE}
+##去掉有批次cluster的细胞
+#Singlet_total_0410A_decorrect<- Singlet_total_0410A[,Singlet_total_0410A@meta.data[["RNA_snn_res.0.2"]]!="5"]
+```
+
+
+```{r echo=TRUE}
+Singlet_total_0410A_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A_decorrect.rds")
+# DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("RNA_UMAP_cluster_decorrect")
+# DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
+# table(Singlet_total_0410A_decorrect@meta.data[["Pool_index_0410A"]])
+```
+
+
+
+
+
