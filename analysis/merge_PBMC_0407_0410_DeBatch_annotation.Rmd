@@ -86,7 +86,7 @@ DimPlot(Singlet_total_PBMC,reduction = "umap",label = T,raster=FALSE)
 ```
 
 ## 0407
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 ##0407
 Singlet_total_0407 <- merge(Singlet_0407_1_add1,c(Singlet_0407_2_add1,Singlet_0407_3_add1,Singlet_0407_4_add1),add.cell.ids = c("0407_1","0407_2","0407_3","0407_4"))
 Pool_index_0407 <- substr(colnames(Singlet_total_0407),1,6)
@@ -94,7 +94,7 @@ Singlet_total_0407@meta.data[["Pool_index_0407"]] <- Pool_index_0407
 ```
 
 ### WNN
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 ##WNN
 DefaultAssay(Singlet_total_0407) <- 'RNA'
 Singlet_total_0407 <- NormalizeData(Singlet_total_0407) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA()
@@ -116,13 +116,13 @@ Singlet_total_0407 <- FindClusters(Singlet_total_0407, graph.name = "wsnn", algo
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 DimPlot(Singlet_total_0407,reduction = "wnn.umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_WNN_UMAP")
 DimPlot(Singlet_total_0407,reduction = "wnn.umap",label = T,raster=FALSE)+ggtitle("0407_WNN_UMAP_cluster")
 ```
 
 ### RNA
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 ##RNA cluster
 Singlet_total_0407@active.assay <- "RNA"
 
@@ -142,7 +142,7 @@ Singlet_total_0407 <- RunUMAP(Singlet_total_0407,dims = 1:20)
 ```
 
 
-```{r eval=FALSE, fig.height=18, fig.width=24, include=FALSE}
+```{r eval=FALSE}
 png("/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png",width = 2400,height = 1800)
 DimPlot(Singlet_total_0407,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
 dev.off()
@@ -151,13 +151,13 @@ dev.off()
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE}
 ##去掉cluster1的细胞
 Singlet_total_0407_decorrect<- Singlet_total_0407[,Singlet_total_0407@meta.data[["RNA_snn_res.0.2"]]!="2"]
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=TRUE}
 Singlet_total_0407_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407_decorrect.rds")
 DimPlot(Singlet_total_0407_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("RNA_UMAP_cluster_decorrect")
 DimPlot(Singlet_total_0407_decorrect,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
@@ -242,7 +242,74 @@ DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",group.by = "Pool_index_
 table(Singlet_total_0410A_decorrect@meta.data[["Pool_index_0410A"]])
 ```
 
+## 0410 B
 
+```{r eval=FALSE, include=FALSE}
+##0410B
+Singlet_total_0410B <- merge(Singlet_0410_B1_add2,c(Singlet_0410_B2_add2,Singlet_0410_B3_add2,Singlet_0410_B4_add2),add.cell.ids = c("0410_B1","0410_B2","0410_B3","0410_B4"))
+Pool_index_0410B <- substr(colnames(Singlet_total_0410B),1,7)
+Singlet_total_0410B@meta.data[["Pool_index_0410B"]] <- Pool_index_0410B
+table(Pool_index_0410B)
+```
+
+### RNA
+```{r eval=FALSE, include=FALSE}
+##RNA cluster
+Singlet_total_0410B@active.assay <- "RNA"
+
+# Select the top 1000 most variable features
+Singlet_total_0410B <- FindVariableFeatures(Singlet_total_0410B)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0410B <- ScaleData(Singlet_total_0410B, features = VariableFeatures(Singlet_total_0410B))
+
+# Run PCA
+Singlet_total_0410B <- RunPCA(Singlet_total_0410B,features = VariableFeatures(Singlet_total_0410B))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0410B <- FindNeighbors(Singlet_total_0410B, reduction = "pca", dims = 1:20)
+Singlet_total_0410B <- FindClusters(Singlet_total_0410B, resolution = 0.2, verbose = FALSE)
+Singlet_total_0410B <- RunUMAP(Singlet_total_0410B,dims = 1:20)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+#pdf("/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf",width = 18,height = 12)
+DimPlot(Singlet_total_0410B,reduction = "umap",group.by = "Pool_index_0410B",raster=FALSE)+ggtitle("0410B_RNA_UMAP_cluster_decorrect")
+#dev.off()
+DimPlot(Singlet_total_0410B,reduction = "umap",label = T,raster=FALSE)+ggtitle("0410B_RNA_UMAP_cluster")
+
+table(Singlet_total_0410B@meta.data[["Pool_index_0410B"]])
+```
+
+
+```{r eval=FALSE, include=FALSE}
+##去掉有批次cluster的细胞
+Singlet_total_0410B_decorrect<- Singlet_total_0410B[,Singlet_total_0410B@meta.data[["RNA_snn_res.0.2"]]!="5"]
+```
+
+
+```{r echo=TRUE}
+Singlet_total_0410B_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410B_decorrect.rds")
+DimPlot(Singlet_total_0410B_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("0410B_RNA_UMAP_cluster_decorrect")
+DimPlot(Singlet_total_0410B_decorrect,reduction = "umap",group.by = "Pool_index_0410B",raster=FALSE)+ggtitle("0410B_RNA_UMAP_decorrect")
+table(Singlet_total_0410B_decorrect@meta.data[["Pool_index_0410B"]])
+```
+
+## merge
+```{r eval=FALSE, include=FALSE}
+#理出来的数据：Singlet_total_PBMC  Singlet_total_0407_decorrect Singlet_total_0410A_decorrect  Singlet_total_0410B_decorrect
+Singlet_total_PBMC@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("PBMC",Singlet_total_PBMC@meta.data[["HTO_maxID"]]))
+Singlet_total_0407_decorrect@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("0407",Singlet_total_0407_decorrect@meta.data[["HTO_maxID"]]))
+Singlet_total_0410A_decorrect@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("0410A",Singlet_total_0410A_decorrect@meta.data[["HTO_maxID"]]))
+Singlet_total_0410B_decorrect@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("0410B",Singlet_total_0410B_decorrect@meta.data[["HTO_maxID"]]))
+
+
+Total_Singlet_PBMC_0407_0410AB <- merge(Singlet_total_PBMC,c(Singlet_total_0407_decorrect,Singlet_total_0410B_decorrect,Singlet_total_0410A_decorrect),add.cell.ids = c("PBMC","0407","0410B","0410A"))
+lot <- substr(colnames(Total_Singlet_PBMC_0407_0410AB),1,4)
+Total_Singlet_PBMC_0407_0410AB@meta.data[["lot"]] <- lot
+
+```
 
 
 
