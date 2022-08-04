@@ -31,6 +31,9 @@ Singlet_0410_B4_add2<- readRDS("/database/jiangxinyu/Result/0410_B4_add2_QC_outs
 
 ```
 
+```{r eval=FALSE, include=FALSE}
+table(Singlet_0410_B1_add2@meta.data[["HTO_classification"]])
+```
 
 
 
