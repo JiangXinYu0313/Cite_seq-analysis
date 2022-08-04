@@ -3,14 +3,19 @@ title: "merge_PBMC_0407_0410_DeBatch_annotation"
 author: "jiangxinyu"
 date: '2022-08-03'
 output: html_document
+code_folding: hide
+editor_options:
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set()
+knitr::opts_chunk$set(message = F,warning = F)
+library(pdftools)
 ```
 
-# Read data and merge
-```{r include=FALSE}
+#Read data and merge
+
+```{r eval=FALSE, include=FALSE}
 Singlet_total_PBMC1<- readRDS("/database/jiangxinyu/Result/Total_PBMC1_QC_outs/Singlet_Coassay_total_PBMC1.rds")
 Singlet_total_PBMC2<- readRDS("/database/jiangxinyu/Result/Total_PBMC2_QC_outs/Singlet_Coassay_total_PBMC2.rds")
 
@@ -31,9 +36,40 @@ Singlet_0410_B4_add2<- readRDS("/database/jiangxinyu/Result/0410_B4_add2_QC_outs
 
 ```
 
-```{r echo=FALSE}
-table(Singlet_0410_B1_add2@meta.data[["HTO_classification"]])
+## PBMC
+
+```{r eval=FALSE, include=FALSE}
+##PBMC
+Singlet_total_PBMC <- merge(Singlet_total_PBMC1,Singlet_total_PBMC2,add.cell.ids = c("PBMC1","PBMC2"))
+PBMC_pool_index <- substr(colnames(Singlet_total_PBMC),1,5)
+Singlet_total_PBMC@meta.data[["PBMC_pool_index"]] <- PBMC_pool_index
 ```
+
+### RNA
+```{r eval=FALSE, include=FALSE}
+##RNA cluster
+Singlet_total_PBMC@active.assay <- "RNA"
+
+# Select the top 1000 most variable features
+Singlet_total_PBMC <- FindVariableFeatures(Singlet_total_PBMC)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_PBMC <- ScaleData(Singlet_total_PBMC, features = VariableFeatures(Singlet_total_PBMC))
+
+# Run PCA
+Singlet_total_PBMC <- RunPCA(Singlet_total_PBMC,features = VariableFeatures(Singlet_total_PBMC))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_PBMC <- FindNeighbors(Singlet_total_PBMC, reduction = "pca", dims = 1:20)
+Singlet_total_PBMC <- FindClusters(Singlet_total_PBMC, resolution = 0.2, verbose = FALSE)
+Singlet_total_PBMC <- RunUMAP(Singlet_total_PBMC,dims = 1:20)
+```
+
+
+
+
+
+
 
 
 
