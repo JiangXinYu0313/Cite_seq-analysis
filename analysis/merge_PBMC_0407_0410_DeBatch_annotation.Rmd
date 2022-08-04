@@ -1,0 +1,42 @@
+---
+title: "merge_PBMC_0407_0410_DeBatch_annotation"
+author: "jiangxinyu"
+date: '2022-08-03'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set()
+```
+
+#Read data and merge
+
+```{r eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=FALSE}
+Singlet_total_PBMC1<- readRDS("/database/jiangxinyu/Result/Total_PBMC1_QC_outs/Singlet_Coassay_total_PBMC1.rds")
+Singlet_total_PBMC2<- readRDS("/database/jiangxinyu/Result/Total_PBMC2_QC_outs/Singlet_Coassay_total_PBMC2.rds")
+
+Singlet_0407_1_add1<- readRDS("/database/jiangxinyu/Result/0407_1_add_L002_QC_outs/Singlet_Coassay_0407_1_add_L002.rds")
+Singlet_0407_2_add1<- readRDS("/database/jiangxinyu/Result/0407_2_add_L002_QC_outs/Singlet_Coassay_0407_2_add_L002.rds")
+##要清除批次cluster 0407-3 0407-4 0410-A1
+Singlet_0407_3_add1<- readRDS("/database/jiangxinyu/Result/0407_3_add1_QC_outs/Singlet_Coassay_0407_3_add1.rds")
+Singlet_0407_4_add1<- readRDS("/database/jiangxinyu/Result/0407_4_add1_QC_outs/Singlet_Coassay_0407_4_add1.rds")
+Singlet_0410_A1_add1<- readRDS("/database/jiangxinyu/Result/0410_A1_add1_QC_outs/Singlet_Coassay_0410_A1_add1.rds")
+
+Singlet_0410_A3_add1<- readRDS("/database/jiangxinyu/Result/0410_A3_add_L002_QC_outs/Singlet_Coassay_0410_A3_add_L002.rds")
+Singlet_0410_A4_add1<- readRDS("/database/jiangxinyu/Result/0410_A4_add_L002_QC_outs/Singlet_Coassay_0410_A4_add_L002.rds")
+
+Singlet_0410_B1_add2<- readRDS("/database/jiangxinyu/Result/0410_B1_add2_QC_outs/Singlet_Coassay_0410_B1_add2.rds")
+Singlet_0410_B2_add2<- readRDS("/database/jiangxinyu/Result/0410_B2_add2_QC_outs/Singlet_Coassay_0410_B2_add2.rds")
+Singlet_0410_B3_add2<- readRDS("/database/jiangxinyu/Result/0410_B3_add2_QC_outs/Singlet_Coassay_0410_B3_add2.rds")
+Singlet_0410_B4_add2<- readRDS("/database/jiangxinyu/Result/0410_B4_add2_QC_outs/Singlet_Coassay_0410_B4_add2.rds")
+
+```
+
+## PBMC
+
+```{r eval=FALSE, include=FALSE}
+##PBMC
+Singlet_total_PBMC <- merge(Singlet_total_PBMC1,Singlet_total_PBMC2,add.cell.ids = c("PBMC1","PBMC2"))
+PBMC_pool_index <- substr(colnames(Singlet_total_PBMC),1,5)
+Singlet_total_PBMC@meta.data[["PBMC_pool_index"]] <- PBMC_pool_index
+```
