@@ -238,8 +238,8 @@ table(Singlet_total_0410A@meta.data[["Pool_index_0410A"]])
 ```{r echo=TRUE}
 Singlet_total_0410A_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A_decorrect.rds")
 DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("RNA_UMAP_cluster_decorrect")
-# DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
-# table(Singlet_total_0410A_decorrect@meta.data[["Pool_index_0410A"]])
+DimPlot(Singlet_total_0410A_decorrect,reduction = "umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
+table(Singlet_total_0410A_decorrect@meta.data[["Pool_index_0410A"]])
 ```
 
 
