@@ -11,7 +11,7 @@ knitr::opts_chunk$set()
 
 # Read data and merge
 
-```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+```{r message=FALSE, warning=FALSE, paged.print=FALSE}
 Singlet_total_PBMC1<- readRDS("/database/jiangxinyu/Result/Total_PBMC1_QC_outs/Singlet_Coassay_total_PBMC1.rds")
 Singlet_total_PBMC2<- readRDS("/database/jiangxinyu/Result/Total_PBMC2_QC_outs/Singlet_Coassay_total_PBMC2.rds")
 
@@ -29,6 +29,8 @@ Singlet_total_PBMC2<- readRDS("/database/jiangxinyu/Result/Total_PBMC2_QC_outs/S
 # Singlet_0410_B2_add2<- readRDS("/database/jiangxinyu/Result/0410_B2_add2_QC_outs/Singlet_Coassay_0410_B2_add2.rds")
 # Singlet_0410_B3_add2<- readRDS("/database/jiangxinyu/Result/0410_B3_add2_QC_outs/Singlet_Coassay_0410_B3_add2.rds")
 # Singlet_0410_B4_add2<- readRDS("/database/jiangxinyu/Result/0410_B4_add2_QC_outs/Singlet_Coassay_0410_B4_add2.rds")
+a <- c(1,2,3)
+print(a)
 
 ```
 
