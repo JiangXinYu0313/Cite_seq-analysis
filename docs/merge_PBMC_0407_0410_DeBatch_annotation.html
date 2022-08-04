@@ -550,15 +550,15 @@ analysis/images/0407_RNA_cluster_Dimplot.png
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree3eaf90cd64109c38bacd2d37ac1763d53cdbf138targetblank3eaf90ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree2cc76825a76b023418678941264d57abf5f97a56targetblank2cc7682a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/3eaf90cd64109c38bacd2d37ac1763d53cdbf138" target="_blank">3eaf90c</a>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/2cc76825a76b023418678941264d57abf5f97a56" target="_blank">2cc7682</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree3eaf90cd64109c38bacd2d37ac1763d53cdbf138targetblank3eaf90ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree2cc76825a76b023418678941264d57abf5f97a56targetblank2cc7682a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -568,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/3eaf90cd64109c38bacd2d37ac1763d53cdbf138" target="_blank">3eaf90c</a>.
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/2cc76825a76b023418678941264d57abf5f97a56" target="_blank">2cc7682</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -584,6 +584,7 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
 
 Untracked files:
     Untracked:  0407_RNA_Batch_Dimplot.png
@@ -634,6 +635,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/2cc76825a76b023418678941264d57abf5f97a56/analysis/merge_PBMC_0407_0410_DeBatch_annotation.Rmd" target="_blank">2cc7682</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Add my first analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JiangXinYu0313/Cite_seq-analysis/acb59e0ae01cdb48a039125d42cec3471c1380e1/docs/merge_PBMC_0407_0410_DeBatch_annotation.html" target="_blank">acb59e0</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -1235,11 +1270,67 @@ JiangXinYu0313
 </div>
 <div id="section" class="section level2">
 <h2>0407</h2>
+<pre class="r"><code>##0407
+Singlet_total_0407 &lt;- merge(Singlet_0407_1_add1,c(Singlet_0407_2_add1,Singlet_0407_3_add1,Singlet_0407_4_add1),add.cell.ids = c(&quot;0407_1&quot;,&quot;0407_2&quot;,&quot;0407_3&quot;,&quot;0407_4&quot;))
+Pool_index_0407 &lt;- substr(colnames(Singlet_total_0407),1,6)
+Singlet_total_0407@meta.data[[&quot;Pool_index_0407&quot;]] &lt;- Pool_index_0407</code></pre>
 <div id="wnn" class="section level3">
 <h3>WNN</h3>
+<pre class="r"><code>##WNN
+DefaultAssay(Singlet_total_0407) &lt;- &#39;RNA&#39;
+Singlet_total_0407 &lt;- NormalizeData(Singlet_total_0407) %&gt;% FindVariableFeatures() %&gt;% ScaleData() %&gt;% RunPCA()
+
+DefaultAssay(Singlet_total_0407) &lt;- &#39;ADT&#39;
+# we will use all ADT features for dimensional reduction
+# we set a dimensional reduction name to avoid overwriting the 
+VariableFeatures(Singlet_total_0407) &lt;- rownames(Singlet_total_0407[[&quot;ADT&quot;]])
+Singlet_total_0407 &lt;- NormalizeData(Singlet_total_0407, normalization.method = &#39;CLR&#39;, margin = 2) %&gt;% 
+  ScaleData() %&gt;% RunPCA(reduction.name = &#39;apca&#39;)
+Singlet_total_0407 &lt;- FindMultiModalNeighbors(
+  Singlet_total_0407, reduction.list = list(&quot;pca&quot;, &quot;apca&quot;), 
+  dims.list = list(1:30, 1:18), modality.weight.name = &quot;RNA.weight&quot;
+)
+
+Singlet_total_0407 &lt;- RunUMAP(Singlet_total_0407, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
+
+Singlet_total_0407 &lt;- FindClusters(Singlet_total_0407, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 0.2, verbose = FALSE)</code></pre>
+<pre class="r"><code>DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP&quot;)
+DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP_cluster&quot;)</code></pre>
 </div>
 <div id="rna-1" class="section level3">
 <h3>RNA</h3>
+<pre class="r"><code>##RNA cluster
+Singlet_total_0407@active.assay &lt;- &quot;RNA&quot;
+
+# Select the top 1000 most variable features
+Singlet_total_0407 &lt;- FindVariableFeatures(Singlet_total_0407)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0407 &lt;- ScaleData(Singlet_total_0407, features = VariableFeatures(Singlet_total_0407))
+
+# Run PCA
+Singlet_total_0407 &lt;- RunPCA(Singlet_total_0407,features = VariableFeatures(Singlet_total_0407))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0407 &lt;- FindNeighbors(Singlet_total_0407, reduction = &quot;pca&quot;, dims = 1:20)
+Singlet_total_0407 &lt;- FindClusters(Singlet_total_0407, resolution = 0.2, verbose = FALSE)
+Singlet_total_0407 &lt;- RunUMAP(Singlet_total_0407,dims = 1:20)</code></pre>
+<pre class="r"><code>png(&quot;/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png&quot;,width = 2400,height = 1800)
+DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster&quot;)
+dev.off()
+
+#DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster&quot;)</code></pre>
+<pre class="r"><code>##去掉cluster1的细胞
+Singlet_total_0407_decorrect&lt;- Singlet_total_0407[,Singlet_total_0407@meta.data[[&quot;RNA_snn_res.0.2&quot;]]!=&quot;2&quot;]</code></pre>
+<pre class="r"><code>Singlet_total_0407_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407_decorrect.rds&quot;)
+DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;RNA_UMAP_cluster_decorrect&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;RNA_UMAP_decorrect&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-12-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>table(Singlet_total_0407_decorrect@meta.data[[&quot;Pool_index_0407&quot;]])</code></pre>
+<pre><code>
+0407_1 0407_2 0407_3 0407_4 
+ 29066  44118  15147  11927 </code></pre>
 </div>
 </div>
 <div id="a" class="section level2">
@@ -1276,6 +1367,17 @@ Date
 <tbody>
 <tr>
 <td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/acb59e0ae01cdb48a039125d42cec3471c1380e1/docs/figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-19-1.png" target="_blank">acb59e0</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+</tr>
+<tr>
+<td>
 <a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/70cd7f9cece77cd306419088e8e4160b8c9d86ce/docs/figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-19-1.png" target="_blank">70cd7f9</a>
 </td>
 <td>
@@ -1291,10 +1393,66 @@ JiangXinYu0313
 </div>
 <pre class="r"><code>DimPlot(Singlet_total_0410A_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0410A&quot;,raster=FALSE)+ggtitle(&quot;RNA_UMAP_decorrect&quot;)</code></pre>
 <p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-19-2.png" width="672" style="display: block; margin: auto;" /></p>
+<p>
+<button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-19-2">
+Past versions of unnamed-chunk-19-2.png
+</button>
+</p>
+<div id="fig-unnamed-chunk-19-2" class="collapse">
+<div class="table-responsive">
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th>
+Version
+</th>
+<th>
+Author
+</th>
+<th>
+Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/acb59e0ae01cdb48a039125d42cec3471c1380e1/docs/figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-19-2.png" target="_blank">acb59e0</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <pre class="r"><code>table(Singlet_total_0410A_decorrect@meta.data[[&quot;Pool_index_0410A&quot;]])</code></pre>
 <pre><code>
 0410_A1 0410_A3 0410_A4 
   20865   36983   37947 </code></pre>
+</div>
+</div>
+<div id="b" class="section level2">
+<h2>0410 B</h2>
+<div id="rna-3" class="section level3">
+<h3>RNA</h3>
+<pre class="r"><code>Singlet_total_0410B_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410B_decorrect.rds&quot;)
+DimPlot(Singlet_total_0410B_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0410B_RNA_UMAP_cluster_decorrect&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0410B_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0410B&quot;,raster=FALSE)+ggtitle(&quot;0410B_RNA_UMAP_decorrect&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-24-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>table(Singlet_total_0410B_decorrect@meta.data[[&quot;Pool_index_0410B&quot;]])</code></pre>
+<pre><code>
+0410_B1 0410_B2 0410_B3 0410_B4 
+  33856   35314   24201   40229 </code></pre>
+</div>
+</div>
+<div id="merge" class="section level2">
+<h2>merge</h2>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1375,7 +1533,6 @@ loaded via a namespace (and not attached):
 [127] grid_4.2.0            rpart_4.1.16          rmarkdown_2.14       
 [130] googledrive_2.0.0     Rtsne_0.16            git2r_0.30.1         
 [133] getPass_0.2-2         lubridate_1.8.0       shiny_1.7.2          </code></pre>
-</div>
 </div>
 </div>
 </div>
