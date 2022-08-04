@@ -372,7 +372,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-ok text-success"
+workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -383,8 +383,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
-</a>
+class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> </a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -397,9 +397,9 @@ class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 0
+aria-hidden="true"></span> 1
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Cite_seq-analysis/</code> <span
@@ -509,30 +509,56 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
-<span class="glyphicon glyphicon-ok text-success"
-aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
+<span class="glyphicon glyphicon-exclamation-sign text-danger"
+aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
 </p>
 </div>
-<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
+<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
 <div class="panel-body">
-<p>Great job! Using relative paths to the files within your workflowr
-project makes it easier to run your code on other machines.</p>
+<p>
+Using absolute paths to the files within your workflowr project makes it
+difficult for you and others to run your code on a different machine.
+Change the absolute path(s) below to the suggested relative path(s) to
+make your code more reproducible.
+</p>
+<table class="table table-condensed table-hover">
+<thead>
+<tr>
+<th style="text-align:left;">
+absolute
+</th>
+<th style="text-align:left;">
+relative
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png
+</td>
+<td style="text-align:left;">
+analysis/images/0407_RNA_cluster_Dimplot.png
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree0242a358bbee8cc23500c1f2b06137a1914d15e6targetblank0242a35a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistreeef9bcb659b4261970111113f7d888247bddd1ce1targetblankef9bcb6a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/0242a358bbee8cc23500c1f2b06137a1914d15e6" target="_blank">0242a35</a>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/ef9bcb659b4261970111113f7d888247bddd1ce1" target="_blank">ef9bcb6</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree0242a358bbee8cc23500c1f2b06137a1914d15e6targetblank0242a35a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistreeef9bcb659b4261970111113f7d888247bddd1ce1targetblankef9bcb6a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +568,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/0242a358bbee8cc23500c1f2b06137a1914d15e6" target="_blank">0242a35</a>.
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/ef9bcb659b4261970111113f7d888247bddd1ce1" target="_blank">ef9bcb6</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -558,6 +584,7 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+    Ignored:    analysis/figure/
 
 Untracked files:
     Untracked:  0407_RNA_Batch_Dimplot.png
@@ -608,6 +635,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/ef9bcb659b4261970111113f7d888247bddd1ce1/analysis/merge_PBMC_0407_0410_DeBatch_annotation.Rmd" target="_blank">ef9bcb6</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Add my first analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JiangXinYu0313/Cite_seq-analysis/5c90320183b4c14f826468772125a3ccb17993a7/docs/merge_PBMC_0407_0410_DeBatch_annotation.html" target="_blank">5c90320</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -972,9 +1033,11 @@ Add my first analysis
 </div>
 </div>
 </div>
-<pre class="r"><code>library(pdftools)
-library(Seurat)
+<pre class="r"><code>library(Seurat)
 library(SeuratObject)
+library(future)
+library(ggplot2)
+library(tidyverse)
 library(harmony)</code></pre>
 <div id="read-data-and-merge" class="section level1">
 <h1>Read data and merge</h1>
@@ -1020,9 +1083,36 @@ Singlet_total_PBMC &lt;- FindNeighbors(Singlet_total_PBMC, reduction = &quot;pca
 Singlet_total_PBMC &lt;- FindClusters(Singlet_total_PBMC, resolution = 0.2, verbose = FALSE)
 Singlet_total_PBMC &lt;- RunUMAP(Singlet_total_PBMC,dims = 1:20)</code></pre>
 <pre class="r"><code>Singlet_total_PBMC&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_PBMC.rds&quot;)
-#pdf(&quot;/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf&quot;,width = 18,height = 12)</code></pre>
-<pre class="r"><code>DimPlot(Singlet_total_PBMC,reduction = &quot;umap&quot;,group.by = &quot;PBMC_pool_index&quot;,raster=FALSE)</code></pre>
-<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+#pdf(&quot;/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf&quot;,width = 18,height = 12)
+DimPlot(Singlet_total_PBMC,reduction = &quot;umap&quot;,group.by = &quot;PBMC_pool_index&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+DimPlot(Singlet_total_PBMC,reduction = &quot;umap&quot;,label = T,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-5-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#table(Singlet_total_PBMC@meta.data[[&quot;PBMC_pool_index&quot;]])</code></pre>
+</div>
+</div>
+<div id="section" class="section level2">
+<h2>0407</h2>
+<div id="wnn" class="section level3">
+<h3>WNN</h3>
+</div>
+<div id="rna-1" class="section level3">
+<h3>RNA</h3>
+<p><img src="images/0407_RNA_cluster_Dimplot.png" /></p>
+</div>
+</div>
+<div id="a" class="section level2">
+<h2>0410 A</h2>
+<div id="wnn-1" class="section level3">
+<h3>WNN</h3>
+</div>
+<div id="rna-2" class="section level3">
+<h3>RNA</h3>
+<pre class="r"><code>Singlet_total_0410A_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A_decorrect.rds&quot;)
+# DimPlot(Singlet_total_0410A_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;RNA_UMAP_cluster_decorrect&quot;)
+# DimPlot(Singlet_total_0410A_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0410A&quot;,raster=FALSE)+ggtitle(&quot;RNA_UMAP_decorrect&quot;)
+# table(Singlet_total_0410A_decorrect@meta.data[[&quot;Pool_index_0410A&quot;]])</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1052,52 +1142,57 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] harmony_0.1.0      Rcpp_1.0.9         sp_1.5-0           SeuratObject_4.1.0
-[5] Seurat_4.1.1       pdftools_3.3.0     workflowr_1.7.0   
+ [1] harmony_0.1.0      Rcpp_1.0.9         forcats_0.5.1      stringr_1.4.0     
+ [5] dplyr_1.0.9        purrr_0.3.4        readr_2.1.2        tidyr_1.2.0       
+ [9] tibble_3.1.8       tidyverse_1.3.2    ggplot2_3.3.6      future_1.27.0     
+[13] sp_1.5-0           SeuratObject_4.1.0 Seurat_4.1.1       workflowr_1.7.0   
 
 loaded via a namespace (and not attached):
-  [1] Rtsne_0.16            colorspace_2.0-3      deldir_1.0-6         
-  [4] ellipsis_0.3.2        ggridges_0.5.3        rprojroot_2.0.3      
-  [7] fs_1.5.2              spatstat.data_2.2-0   rstudioapi_0.13      
- [10] farver_2.1.1          leiden_0.4.2          listenv_0.8.0        
- [13] ggrepel_0.9.1         fansi_1.0.3           codetools_0.2-18     
- [16] splines_4.2.0         cachem_1.0.6          knitr_1.39           
- [19] polyclip_1.10-0       jsonlite_1.8.0        ica_1.0-3            
- [22] cluster_2.1.3         png_0.1-7             rgeos_0.5-9          
- [25] uwot_0.1.11           spatstat.sparse_2.1-1 shiny_1.7.2          
- [28] sctransform_0.3.3     compiler_4.2.0        httr_1.4.3           
- [31] assertthat_0.2.1      Matrix_1.4-1          fastmap_1.1.0        
- [34] lazyeval_0.2.2        cli_3.3.0             later_1.3.0          
- [37] htmltools_0.5.3       tools_4.2.0           igraph_1.3.4         
- [40] gtable_0.3.0          glue_1.6.2            RANN_2.6.1           
- [43] reshape2_1.4.4        dplyr_1.0.9           scattermore_0.8      
- [46] jquerylib_0.1.4       vctrs_0.4.1           nlme_3.1-158         
- [49] progressr_0.10.1      lmtest_0.9-40         spatstat.random_2.2-0
- [52] xfun_0.31             stringr_1.4.0         globals_0.15.1       
- [55] ps_1.7.1              mime_0.12             miniUI_0.1.1.1       
- [58] lifecycle_1.0.1       irlba_2.3.5           goftest_1.2-3        
- [61] future_1.27.0         getPass_0.2-2         MASS_7.3-58          
- [64] zoo_1.8-10            scales_1.2.0          spatstat.core_2.4-4  
- [67] spatstat.utils_2.3-1  promises_1.2.0.1      parallel_4.2.0       
- [70] RColorBrewer_1.1-3    yaml_2.3.5            reticulate_1.25      
- [73] pbapply_1.5-0         gridExtra_2.3         ggplot2_3.3.6        
- [76] sass_0.4.2            rpart_4.1.16          stringi_1.7.8        
- [79] highr_0.9             rlang_1.0.4           pkgconfig_2.0.3      
- [82] matrixStats_0.62.0    evaluate_0.15         lattice_0.20-45      
- [85] tensor_1.5            ROCR_1.0-11           purrr_0.3.4          
- [88] labeling_0.4.2        patchwork_1.1.1       htmlwidgets_1.5.4    
- [91] cowplot_1.1.1         processx_3.7.0        tidyselect_1.1.2     
- [94] parallelly_1.32.1     RcppAnnoy_0.0.19      plyr_1.8.7           
- [97] magrittr_2.0.3        R6_2.5.1              generics_0.1.3       
-[100] DBI_1.1.3             mgcv_1.8-40           pillar_1.8.0         
-[103] whisker_0.4           fitdistrplus_1.1-8    abind_1.4-5          
-[106] survival_3.3-1        tibble_3.1.8          future.apply_1.9.0   
-[109] KernSmooth_2.23-20    utf8_1.2.2            spatstat.geom_2.4-0  
-[112] plotly_4.10.0         rmarkdown_2.14        grid_4.2.0           
-[115] data.table_1.14.2     qpdf_1.2.0            callr_3.7.1          
-[118] git2r_0.30.1          digest_0.6.29         xtable_1.8-4         
-[121] tidyr_1.2.0           httpuv_1.6.5          munsell_0.5.0        
-[124] viridisLite_0.4.0     bslib_0.4.0           askpass_1.1          </code></pre>
+  [1] readxl_1.4.0          backports_1.4.1       plyr_1.8.7           
+  [4] igraph_1.3.4          lazyeval_0.2.2        splines_4.2.0        
+  [7] listenv_0.8.0         scattermore_0.8       digest_0.6.29        
+ [10] htmltools_0.5.3       fansi_1.0.3           magrittr_2.0.3       
+ [13] tensor_1.5            googlesheets4_1.0.0   cluster_2.1.3        
+ [16] ROCR_1.0-11           tzdb_0.3.0            globals_0.15.1       
+ [19] modelr_0.1.8          matrixStats_0.62.0    spatstat.sparse_2.1-1
+ [22] colorspace_2.0-3      rvest_1.0.2           ggrepel_0.9.1        
+ [25] haven_2.5.0           xfun_0.31             crayon_1.5.1         
+ [28] callr_3.7.1           jsonlite_1.8.0        progressr_0.10.1     
+ [31] spatstat.data_2.2-0   survival_3.3-1        zoo_1.8-10           
+ [34] glue_1.6.2            polyclip_1.10-0       gtable_0.3.0         
+ [37] gargle_1.2.0          leiden_0.4.2          future.apply_1.9.0   
+ [40] abind_1.4-5           scales_1.2.0          DBI_1.1.3            
+ [43] spatstat.random_2.2-0 miniUI_0.1.1.1        viridisLite_0.4.0    
+ [46] xtable_1.8-4          reticulate_1.25       spatstat.core_2.4-4  
+ [49] htmlwidgets_1.5.4     httr_1.4.3            RColorBrewer_1.1-3   
+ [52] ellipsis_0.3.2        ica_1.0-3             farver_2.1.1         
+ [55] pkgconfig_2.0.3       sass_0.4.2            uwot_0.1.11          
+ [58] dbplyr_2.2.1          deldir_1.0-6          utf8_1.2.2           
+ [61] labeling_0.4.2        tidyselect_1.1.2      rlang_1.0.4          
+ [64] reshape2_1.4.4        later_1.3.0           munsell_0.5.0        
+ [67] cellranger_1.1.0      tools_4.2.0           cachem_1.0.6         
+ [70] cli_3.3.0             generics_0.1.3        broom_1.0.0          
+ [73] ggridges_0.5.3        evaluate_0.15         fastmap_1.1.0        
+ [76] yaml_2.3.5            goftest_1.2-3         processx_3.7.0       
+ [79] knitr_1.39            fs_1.5.2              fitdistrplus_1.1-8   
+ [82] RANN_2.6.1            pbapply_1.5-0         nlme_3.1-158         
+ [85] whisker_0.4           mime_0.12             xml2_1.3.3           
+ [88] compiler_4.2.0        rstudioapi_0.13       plotly_4.10.0        
+ [91] png_0.1-7             spatstat.utils_2.3-1  reprex_2.0.1         
+ [94] bslib_0.4.0           stringi_1.7.8         highr_0.9            
+ [97] ps_1.7.1              rgeos_0.5-9           lattice_0.20-45      
+[100] Matrix_1.4-1          vctrs_0.4.1           pillar_1.8.0         
+[103] lifecycle_1.0.1       spatstat.geom_2.4-0   lmtest_0.9-40        
+[106] jquerylib_0.1.4       RcppAnnoy_0.0.19      data.table_1.14.2    
+[109] cowplot_1.1.1         irlba_2.3.5           httpuv_1.6.5         
+[112] patchwork_1.1.1       R6_2.5.1              promises_1.2.0.1     
+[115] KernSmooth_2.23-20    gridExtra_2.3         parallelly_1.32.1    
+[118] codetools_0.2-18      MASS_7.3-58           assertthat_0.2.1     
+[121] rprojroot_2.0.3       withr_2.5.0           sctransform_0.3.3    
+[124] hms_1.1.1             mgcv_1.8-40           parallel_4.2.0       
+[127] grid_4.2.0            rpart_4.1.16          rmarkdown_2.14       
+[130] googledrive_2.0.0     Rtsne_0.16            git2r_0.30.1         
+[133] getPass_0.2-2         lubridate_1.8.0       shiny_1.7.2          </code></pre>
 </div>
 </div>
 </div>
