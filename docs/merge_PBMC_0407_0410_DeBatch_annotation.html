@@ -524,15 +524,15 @@ project makes it easier to run your code on other machines.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree630cb93e61c8d0a7a12c193bb5ccf4aa78a40ca4targetblank630cb93a">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistreeeef197995126bef891142e86849eabf665e8df64targetblankeef1979a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/630cb93e61c8d0a7a12c193bb5ccf4aa78a40ca4" target="_blank">630cb93</a>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/eef197995126bef891142e86849eabf665e8df64" target="_blank">eef1979</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree630cb93e61c8d0a7a12c193bb5ccf4aa78a40ca4targetblank630cb93a"
+id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistreeeef197995126bef891142e86849eabf665e8df64targetblankeef1979a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -542,7 +542,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/630cb93e61c8d0a7a12c193bb5ccf4aa78a40ca4" target="_blank">630cb93</a>.
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/eef197995126bef891142e86849eabf665e8df64" target="_blank">eef1979</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -604,6 +604,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/eef197995126bef891142e86849eabf665e8df64/analysis/merge_PBMC_0407_0410_DeBatch_annotation.Rmd" target="_blank">eef1979</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Add my first analysis
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JiangXinYu0313/Cite_seq-analysis/27663126c9fe4993de381c2aaf8157e60e2d7049/docs/merge_PBMC_0407_0410_DeBatch_annotation.html" target="_blank">2766312</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 Rmd
@@ -732,26 +766,6 @@ Add my first analysis
 </div>
 <div id="read-data-and-merge" class="section level1">
 <h1>Read data and merge</h1>
-<pre class="r"><code># Singlet_total_PBMC1&lt;- readRDS(&quot;/database/jiangxinyu/Result/Total_PBMC1_QC_outs/Singlet_Coassay_total_PBMC1.rds&quot;)
-# Singlet_total_PBMC2&lt;- readRDS(&quot;/database/jiangxinyu/Result/Total_PBMC2_QC_outs/Singlet_Coassay_total_PBMC2.rds&quot;)
-
-# Singlet_0407_1_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0407_1_add_L002_QC_outs/Singlet_Coassay_0407_1_add_L002.rds&quot;)
-# Singlet_0407_2_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0407_2_add_L002_QC_outs/Singlet_Coassay_0407_2_add_L002.rds&quot;)
-# ##要清除批次cluster 0407-3 0407-4 0410-A1
-# Singlet_0407_3_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0407_3_add1_QC_outs/Singlet_Coassay_0407_3_add1.rds&quot;)
-# Singlet_0407_4_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0407_4_add1_QC_outs/Singlet_Coassay_0407_4_add1.rds&quot;)
-# Singlet_0410_A1_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_A1_add1_QC_outs/Singlet_Coassay_0410_A1_add1.rds&quot;)
-# 
-# Singlet_0410_A3_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_A3_add_L002_QC_outs/Singlet_Coassay_0410_A3_add_L002.rds&quot;)
-# Singlet_0410_A4_add1&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_A4_add_L002_QC_outs/Singlet_Coassay_0410_A4_add_L002.rds&quot;)
-# 
-# Singlet_0410_B1_add2&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_B1_add2_QC_outs/Singlet_Coassay_0410_B1_add2.rds&quot;)
-# Singlet_0410_B2_add2&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_B2_add2_QC_outs/Singlet_Coassay_0410_B2_add2.rds&quot;)
-# Singlet_0410_B3_add2&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_B3_add2_QC_outs/Singlet_Coassay_0410_B3_add2.rds&quot;)
-# Singlet_0410_B4_add2&lt;- readRDS(&quot;/database/jiangxinyu/Result/0410_B4_add2_QC_outs/Singlet_Coassay_0410_B4_add2.rds&quot;)
-a &lt;- c(1,2,3)
-print(a)</code></pre>
-<pre><code>[1] 1 2 3</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
