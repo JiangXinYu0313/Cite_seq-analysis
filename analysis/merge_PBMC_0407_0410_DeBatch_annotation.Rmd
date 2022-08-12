@@ -13,7 +13,7 @@ knitr::opts_chunk$set(message = F,warning = F)
 
 ```
 
-```{r eval=T}
+```{r eval=TRUE}
 library(Seurat)
 library(SeuratObject)
 library(future)
@@ -22,10 +22,9 @@ library(tidyverse)
 library(harmony)
 ```
 
-
 # Read data and merge
 
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 Singlet_total_PBMC1<- readRDS("/database/jiangxinyu/Result/Total_PBMC1_QC_outs/Singlet_Coassay_total_PBMC1.rds")
 Singlet_total_PBMC2<- readRDS("/database/jiangxinyu/Result/Total_PBMC2_QC_outs/Singlet_Coassay_total_PBMC2.rds")
 
@@ -43,12 +42,11 @@ Singlet_0410_B1_add2<- readRDS("/database/jiangxinyu/Result/0410_B1_add2_QC_outs
 Singlet_0410_B2_add2<- readRDS("/database/jiangxinyu/Result/0410_B2_add2_QC_outs/Singlet_Coassay_0410_B2_add2.rds")
 Singlet_0410_B3_add2<- readRDS("/database/jiangxinyu/Result/0410_B3_add2_QC_outs/Singlet_Coassay_0410_B3_add2.rds")
 Singlet_0410_B4_add2<- readRDS("/database/jiangxinyu/Result/0410_B4_add2_QC_outs/Singlet_Coassay_0410_B4_add2.rds")
-
 ```
 
 ## PBMC
 
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##PBMC
 Singlet_total_PBMC <- merge(Singlet_total_PBMC1,Singlet_total_PBMC2,add.cell.ids = c("PBMC1","PBMC2"))
 PBMC_pool_index <- substr(colnames(Singlet_total_PBMC),1,5)
@@ -57,7 +55,7 @@ Singlet_total_PBMC@meta.data[["PBMC_pool_index"]] <- PBMC_pool_index
 
 ### RNA
 
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##RNA cluster
 Singlet_total_PBMC@active.assay <- "RNA"
 
@@ -82,11 +80,11 @@ Singlet_total_PBMC<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_o
 DimPlot(Singlet_total_PBMC,reduction = "umap",group.by = "PBMC_pool_index",raster=FALSE)
 #dev.off()
 DimPlot(Singlet_total_PBMC,reduction = "umap",label = T,raster=FALSE)
-#table(Singlet_total_PBMC@meta.data[["PBMC_pool_index"]])
+table(Singlet_total_PBMC@meta.data[["PBMC_pool_index"]])
 ```
 
 ## 0407
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##0407
 Singlet_total_0407 <- merge(Singlet_0407_1_add1,c(Singlet_0407_2_add1,Singlet_0407_3_add1,Singlet_0407_4_add1),add.cell.ids = c("0407_1","0407_2","0407_3","0407_4"))
 Pool_index_0407 <- substr(colnames(Singlet_total_0407),1,6)
@@ -94,7 +92,7 @@ Singlet_total_0407@meta.data[["Pool_index_0407"]] <- Pool_index_0407
 ```
 
 ### WNN
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##WNN
 DefaultAssay(Singlet_total_0407) <- 'RNA'
 Singlet_total_0407 <- NormalizeData(Singlet_total_0407) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA()
@@ -116,13 +114,14 @@ Singlet_total_0407 <- FindClusters(Singlet_total_0407, graph.name = "wsnn", algo
 ```
 
 
-```{r eval=FALSE}
+```{r eval=TRUE}
+Singlet_total_0407<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407.rds")
 DimPlot(Singlet_total_0407,reduction = "wnn.umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_WNN_UMAP")
 DimPlot(Singlet_total_0407,reduction = "wnn.umap",label = T,raster=FALSE)+ggtitle("0407_WNN_UMAP_cluster")
 ```
 
 ### RNA
-```{r eval=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##RNA cluster
 Singlet_total_0407@active.assay <- "RNA"
 
@@ -142,30 +141,27 @@ Singlet_total_0407 <- RunUMAP(Singlet_total_0407,dims = 1:20)
 ```
 
 
-```{r eval=FALSE}
-png("/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png",width = 2400,height = 1800)
-DimPlot(Singlet_total_0407,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
-dev.off()
-
-#DimPlot(Singlet_total_0407,reduction = "umap",label = T,raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
+```{r echo=TRUE}
+DimPlot(Singlet_total_0407,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_RNA_UMAP")
+DimPlot(Singlet_total_0407,reduction = "umap",label = T,raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster")
 ```
 
 
-```{r eval=FALSE}
-##去掉cluster1的细胞
+```{r eval=FALSE,echo=TRUE}
+##去掉存在批次的cluster
 Singlet_total_0407_decorrect<- Singlet_total_0407[,Singlet_total_0407@meta.data[["RNA_snn_res.0.2"]]!="2"]
 ```
 
 
 ```{r eval=TRUE}
 Singlet_total_0407_decorrect<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407_decorrect.rds")
-DimPlot(Singlet_total_0407_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("RNA_UMAP_cluster_decorrect")
-DimPlot(Singlet_total_0407_decorrect,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("RNA_UMAP_decorrect")
+DimPlot(Singlet_total_0407_decorrect,reduction = "umap",label = T,raster=FALSE)+ggtitle("0407_RNA_UMAP_cluster_decorrect")
+DimPlot(Singlet_total_0407_decorrect,reduction = "umap",group.by = "Pool_index_0407",raster=FALSE)+ggtitle("0407_RNA_UMAP_decorrect")
 table(Singlet_total_0407_decorrect@meta.data[["Pool_index_0407"]])
 ```
 
 ## 0410 A
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##0410A
 Singlet_total_0410A <- merge(Singlet_0410_A1_add1,c(Singlet_0410_A3_add1,Singlet_0410_A4_add1),add.cell.ids = c("0410_A1","0410_A3","0410_A4"))
 Pool_index_0410A <- substr(colnames(Singlet_total_0410A),1,7)
@@ -173,7 +169,7 @@ Singlet_total_0410A@meta.data[["Pool_index_0410A"]] <- Pool_index_0410A
 ```
 
 ### WNN
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##WNN
 DefaultAssay(Singlet_total_0410A) <- 'RNA'
 Singlet_total_0410A <- NormalizeData(Singlet_total_0410A) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA()
@@ -195,13 +191,14 @@ Singlet_total_0410A <- FindClusters(Singlet_total_0410A, graph.name = "wsnn", al
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r echo=TRUE}
+Singlet_total_0410A<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A.rds")
 DimPlot(Singlet_total_0410A,reduction = "wnn.umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("WNN_UMAP")
 DimPlot(Singlet_total_0410A,reduction = "wnn.umap",label = T,raster=FALSE)+ggtitle("WNN_UMAP_cluster")
 ```
 
 ### RNA
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##RNA cluster
 Singlet_total_0410A@active.assay <- "RNA"
 
@@ -221,7 +218,7 @@ Singlet_total_0410A <- RunUMAP(Singlet_total_0410A,dims = 1:20)
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r echo=TRUE}
 DimPlot(Singlet_total_0410A,reduction = "umap",group.by = "Pool_index_0410A",raster=FALSE)+ggtitle("RNA_UMAP")
 DimPlot(Singlet_total_0410A,reduction = "umap",label = T,raster=FALSE)+ggtitle("WNN_UMAP_clusster")
 
@@ -229,9 +226,9 @@ table(Singlet_total_0410A@meta.data[["Pool_index_0410A"]])
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##去掉有批次cluster的细胞
-#Singlet_total_0410A_decorrect<- Singlet_total_0410A[,Singlet_total_0410A@meta.data[["RNA_snn_res.0.2"]]!="5"]
+Singlet_total_0410A_decorrect<- Singlet_total_0410A[,Singlet_total_0410A@meta.data[["RNA_snn_res.0.2"]]!="5"]
 ```
 
 
@@ -244,7 +241,7 @@ table(Singlet_total_0410A_decorrect@meta.data[["Pool_index_0410A"]])
 
 ## 0410 B
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##0410B
 Singlet_total_0410B <- merge(Singlet_0410_B1_add2,c(Singlet_0410_B2_add2,Singlet_0410_B3_add2,Singlet_0410_B4_add2),add.cell.ids = c("0410_B1","0410_B2","0410_B3","0410_B4"))
 Pool_index_0410B <- substr(colnames(Singlet_total_0410B),1,7)
@@ -253,7 +250,7 @@ table(Pool_index_0410B)
 ```
 
 ### RNA
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##RNA cluster
 Singlet_total_0410B@active.assay <- "RNA"
 
@@ -273,17 +270,17 @@ Singlet_total_0410B <- RunUMAP(Singlet_total_0410B,dims = 1:20)
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r echo=TRUE}
+Singlet_total_0410B<- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410B.rds")
 #pdf("/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf",width = 18,height = 12)
-DimPlot(Singlet_total_0410B,reduction = "umap",group.by = "Pool_index_0410B",raster=FALSE)+ggtitle("0410B_RNA_UMAP_cluster_decorrect")
+DimPlot(Singlet_total_0410B,reduction = "umap",group.by = "Pool_index_0410B",raster=FALSE)+ggtitle("0410B_RNA_UMAP")
 #dev.off()
 DimPlot(Singlet_total_0410B,reduction = "umap",label = T,raster=FALSE)+ggtitle("0410B_RNA_UMAP_cluster")
-
 table(Singlet_total_0410B@meta.data[["Pool_index_0410B"]])
 ```
 
 
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 ##去掉有批次cluster的细胞
 Singlet_total_0410B_decorrect<- Singlet_total_0410B[,Singlet_total_0410B@meta.data[["RNA_snn_res.0.2"]]!="5"]
 ```
@@ -297,7 +294,7 @@ table(Singlet_total_0410B_decorrect@meta.data[["Pool_index_0410B"]])
 ```
 
 ## merge
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE,echo=TRUE}
 #理出来的数据：Singlet_total_PBMC  Singlet_total_0407_decorrect Singlet_total_0410A_decorrect  Singlet_total_0410B_decorrect
 Singlet_total_PBMC@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("PBMC",Singlet_total_PBMC@meta.data[["HTO_maxID"]]))
 Singlet_total_0407_decorrect@meta.data[["HTO_maxID"]] <- gsub(" ",".",paste("0407",Singlet_total_0407_decorrect@meta.data[["HTO_maxID"]]))
@@ -310,6 +307,659 @@ lot <- substr(colnames(Total_Singlet_PBMC_0407_0410AB),1,4)
 Total_Singlet_PBMC_0407_0410AB@meta.data[["lot"]] <- lot
 
 ```
+
+
+
+
+
+
+
+
+
+
+# clustering & Batch effect correction
+```{r eval=TRUE,echo=TRUE}
+Total_Singlet_PBMC_0407_0410AB <- readRDS("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Total_Singlet_PBMC_0407_0410AB.rds")
+```
+## WNN
+```{r eval=FALSE,echo=TRUE}
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'RNA'
+Total_Singlet_PBMC_0407_0410AB <- NormalizeData(Total_Singlet_PBMC_0407_0410AB) %>% FindVariableFeatures() %>% ScaleData() %>% RunPCA(reduction.name = 'RNA.PCA')
+
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+VariableFeatures(Total_Singlet_PBMC_0407_0410AB) <- rownames(Total_Singlet_PBMC_0407_0410AB[["ADT"]])
+Total_Singlet_PBMC_0407_0410AB <- NormalizeData(Total_Singlet_PBMC_0407_0410AB, normalization.method = 'CLR', margin = 2) %>% ScaleData() %>% RunPCA(reduction.name = 'ADT.PCA')
+
+Total_Singlet_PBMC_0407_0410AB <- FindMultiModalNeighbors(
+  Total_Singlet_PBMC_0407_0410AB, reduction.list = list("RNA.PCA", "ADT.PCA"), 
+  dims.list = list(1:30, 1:18), modality.weight.name = "RNA.weight"
+)
+
+Total_Singlet_PBMC_0407_0410AB <- RunUMAP(Total_Singlet_PBMC_0407_0410AB, nn.name = "weighted.nn", reduction.name = "wnn.umap", reduction.key = "wnnUMAP_")
+
+Total_Singlet_PBMC_0407_0410AB <- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = "wsnn", algorithm = 3, resolution = 2, verbose = FALSE)
+```
+
+```{r eval=TRUE,echo=TRUE}
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",group.by = "lot",label = T,label.box = T,repel = T,raster=FALSE)+ggtitle("WNN UMAP")
+```
+
+
+
+
+
+```{r eval=TRUE,echo=TRUE}
+Zero_B_ADT <- c("Hu.CD19")#CD19+
+Zero_Plasma_GEX <- c("MZB1","CD79A","IGHG1","SDC1")
+Zero_T_ADT <- c("Hu.CD3-UCHT1")
+Zero_T_GEX <- c("CD3D","CD3E","CD3G")
+Zero_NK_ADT <- c("Hu.CD3-UCHT1","Hu.CD16","Hu.CD56")#CD3- CD16+ CD56+
+Zero_Mega_ADT <- c("Hu.CD42b","Hu.CD41")#CD42b+ CD41+
+Zero_Myeloid_ADT <- c("Hu.CD11b")#CD11b+
+Zero_Myeloid_GEX <- c("CTS3","LYZ")
+Zero_RBC_GEX <- c("HBB","HBA2","HBA1")
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = Zero_B_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = Zero_T_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = "Hu.CD4-RPA.T4",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = "Hu.CD8",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = Zero_Myeloid_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = "Hu.CD16",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",features = "Hu.CD56",raster=FALSE)
+
+```
+## RNA
+```{r eval=FALSE,echo=TRUE}
+##RNA cluster
+library(future)
+library(ggplot2)
+plan("multicore", workers = 8)
+Total_Singlet_PBMC_0407_0410AB@active.assay <- "RNA"
+
+# Select the top 1000 most variable features
+# Total_Singlet_PBMC_0407_0410AB <- FindVariableFeatures(Total_Singlet_PBMC_0407_0410AB)
+# 
+# # Scaling RNA data, we only scale the variable features here for efficiency
+# Total_Singlet_PBMC_0407_0410AB <- ScaleData(Total_Singlet_PBMC_0407_0410AB, features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB))
+# 
+# # Run PCA
+# Total_Singlet_PBMC_0407_0410AB <- RunPCA(Total_Singlet_PBMC_0407_0410AB,features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB),reduction.name = "RNA.PCA")
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Total_Singlet_PBMC_0407_0410AB <- FindNeighbors(Total_Singlet_PBMC_0407_0410AB, reduction = "RNA.PCA", dims = 1:20)
+Total_Singlet_PBMC_0407_0410AB <- FindClusters(Total_Singlet_PBMC_0407_0410AB, resolution = 0.2, verbose = FALSE)
+Total_Singlet_PBMC_0407_0410AB <- RunUMAP(Total_Singlet_PBMC_0407_0410AB,dims = 1:20,reduction = "RNA.PCA",reduction.name = "RNA.UMAP")
+```
+
+
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf",width = 18,height = 12)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.PCA",group.by = "lot",raster=FALSE,label.box = T,repel = T)+ggtitle("RNA PCA")
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",group.by = "lot",raster=FALSE,label.box = T,repel = T)+ggtitle("RNA UMAP")
+```
+
+```{r eval=TRUE,echo=TRUE}
+plan("multicore")
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = Zero_B_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = Zero_T_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = "Hu.CD4-RPA.T4",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = "Hu.CD8",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = Zero_Myeloid_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = "Hu.CD16",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "RNA.UMAP",features = "Hu.CD56",raster=FALSE)
+```
+
+## ADT 
+```{r eval=FALSE,echo=TRUE}
+library(future)
+plan(sequential)
+Total_Singlet_PBMC_0407_0410AB@active.assay <- "ADT"
+
+# Select the top 1000 most variable features
+# Total_Singlet_PBMC_0407_0410AB <- FindVariableFeatures(Total_Singlet_PBMC_0407_0410AB)
+# 
+# # Scaling RNA data, we only scale the variable features here for efficiency
+# Total_Singlet_PBMC_0407_0410AB <- ScaleData(Total_Singlet_PBMC_0407_0410AB, features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB))
+# 
+# # Run PCA
+Total_Singlet_PBMC_0407_0410AB <- RunPCA(Total_Singlet_PBMC_0407_0410AB,features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB),reduction.name = "ADT.PCA")
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Total_Singlet_PBMC_0407_0410AB <- FindNeighbors(Total_Singlet_PBMC_0407_0410AB, reduction = "ADT.PCA", dims = 1:20)
+Total_Singlet_PBMC_0407_0410AB <- FindClusters(Total_Singlet_PBMC_0407_0410AB, resolution = 0.2, verbose = FALSE)
+Total_Singlet_PBMC_0407_0410AB <- RunUMAP(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.PCA",reduction.name = "ADT.UMAP", reduction.key = "adtUMAP_",dims = 1:20)
+```
+
+
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf",width = 18,height = 12)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.PCA",group.by = "lot",raster=FALSE,label.box = T,repel = T)+ggtitle("ADT PCA")
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",group.by = "lot",raster=FALSE,label.box = T,repel = T)+ggtitle("ADT UMAP")
+```
+
+```{r eval=TRUE,echo=TRUE}
+plan("multicore")
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = Zero_B_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = Zero_T_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = "Hu.CD4-RPA.T4",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = "Hu.CD8",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = Zero_Myeloid_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = "Hu.CD16",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.UMAP",features = "Hu.CD56",raster=FALSE)
+```
+
+
+## harmony(ADT)
+```{r eval=FALSE,echo=TRUE}
+library(harmony)
+library(ggplot2)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+Total_Singlet_PBMC_0407_0410AB <- Total_Singlet_PBMC_0407_0410AB %>% RunHarmony("lot",reduction = "ADT.PCA",reduction.save = "ADT_harmony.PCA",plot_convergence = TRUE)
+```
+
+
+```{r eval=TRUE,echo=TRUE}
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "ADT.PCA",group.by = "lot",label.box = T,repel = T,raster=FALSE)+ggtitle("non-harmony")
+DimPlot(object = Total_Singlet_PBMC_0407_0410AB, reduction = "ADT_harmony.PCA", pt.size = .1, group.by = "lot",label.box = T,repel = T,raster=FALSE)+ggtitle("harmony")
+```
+
+
+
+## WNN after harmony
+```{r eval=FALSE,echo=TRUE}
+plan("multicore", workers = 32)
+Total_Singlet_PBMC_0407_0410AB <- FindMultiModalNeighbors(
+  Total_Singlet_PBMC_0407_0410AB, reduction.list = list("RNA.PCA", "harmony"), 
+  dims.list = list(1:30, 1:18), modality.weight.name = "RNA.weight"
+)
+
+Total_Singlet_PBMC_0407_0410AB <- RunUMAP(Total_Singlet_PBMC_0407_0410AB, nn.name = "weighted.nn", reduction.name = "hwnn.umap", reduction.key = "hwnnUMAP_")
+##non-cluster
+# Total_Singlet_PBMC_0407_0410AB <- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = "wsnn", algorithm = 3, resolution = 5, verbose = FALSE)
+```
+
+```{r eval=TRUE,echo=TRUE}
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "wnn.umap",group.by = "lot",label = T,label.box = T,repel = T,raster=FALSE)+ggtitle("WNN UMAP")
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",group.by = "lot",label = T,label.box = T,repel = T,raster=FALSE)+ggtitle("harmony+WNN UMAP")
+```
+
+
+```{r eval=TRUE,echo=TRUE}
+plan("multicore")
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) <- 'ADT'
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_B_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_T_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = "Hu.CD4-RPA.T4",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = "Hu.CD8",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_Myeloid_ADT,raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = "Hu.CD16",raster=FALSE)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = "Hu.CD56",raster=FALSE)
+
+```
+
+
+# WNN cluster & Annotation
+```{r eval=FALSE,echo=TRUE}
+Total_Singlet_PBMC_0407_0410AB <- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = "wsnn", algorithm = 3, resolution = 2, verbose = FALSE)
+```
+
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/merge_hwnn_58_clusters_Dimplot.pdf",width = 22,height = 18)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",label = T,label.box = T,repel = T,raster=FALSE)+ggtitle("hWNN_58_Clusters")
+#dev.off()
+```
+## Zero hierarchy
+### Zero ADT marker
+```{r eval=TRUE,echo=TRUE}
+Zero_B_ADT <- c("Hu.CD19")#CD19+
+Zero_Plasma_GEX <- c("MZB1","CD79A","IGHG1","SDC1")
+Zero_T_ADT <- c("Hu.CD3-UCHT1")
+Zero_T_GEX <- c("CD3D","CD3E","CD3G")
+Zero_NK_ADT <- c("Hu.CD3-UCHT1","Hu.CD16","Hu.CD56")#CD3- CD16+ CD56+
+Zero_Mega_ADT <- c("Hu.CD42b","Hu.CD41")#CD42b+ CD41+
+Zero_Myeloid_ADT <- c("Hu.CD11b")#CD11b+
+Zero_Myeloid_GEX <- c("CTS3","LYZ")
+Zero_RBC_GEX <- c("HBB","HBA2","HBA1")
+```
+
+### B
+```{r eval=TRUE,echo=TRUE}
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = Zero_B_ADT,cluster.idents = T,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_B")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_B_Merge_ADT_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_B_ADT,raster=FALSE,repel = T,label = T)
+#dev.off()
+```
+
+### T
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_T_Merge_ADT_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = Zero_T_ADT,cluster.idents = T,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_T_Merge_ADT_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_T_ADT,raster=FALSE,repel = T,label = T)
+#dev.off()
+```
+
+### NK
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = Zero_NK_ADT,cluster.idents = T,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_NK")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_CD16_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_NK_ADT[2],raster=FALSE,repel = T,label = T)
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_CD56_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_NK_ADT[3],raster=FALSE,repel = T,label = T)
+#dev.off()
+```
+
+
+### Myeloid
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Myeloid_Merge_ADT_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = Zero_Myeloid_ADT,cluster.idents = T,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_Myeloid")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Myeloid_Merge_ADT_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_Myeloid_ADT,raster=FALSE,repel = T,label = T)
+#dev.off()
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = Zero_Mega_ADT[2],raster=FALSE,repel = T,label = T)
+```
+### Unkonw
+```{r eval=FALSE,echo=TRUE}
+library(future)
+plan("multicore")
+Total_Singlet_PBMC_0407_0410AB@active.assay <- "ADT"
+Zero_47_ADT.marker<- FindMarkers(Total_Singlet_PBMC_0407_0410AB,ident.1 = 47, min.pct = 0.25)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = c("Hu.CD71"),raster=FALSE,repel = T,label = T)
+```
+
+### Annotation Zero
+```{r eval=TRUE,echo=TRUE}
+Merge_Zero_B_58cluster <- c(13,16,20,39,40,43,44,46)
+Merge_Zero_T_58cluster <- c(4,5,38,53,1,6,9,22,27,45,50,55,57,0,3,11,34,56,24,51,54,28,25,8,19,12,2,32,21,41,42,18,30,35)
+Merge_Zero_NK_58cluster <- c(7,10,15,17,29,31,49,52)
+Merge_Zero_Myeloid_58cluster <- c(14,48,23,36,26,33,37)#37可能是Mega 47 Unknow
+
+Merge_Zero_celltype <- Total_Singlet_PBMC_0407_0410AB@meta.data[["wsnn_res.2"]]
+
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_B_58cluster] <- "B"
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_T_58cluster] <- "T"
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_NK_58cluster] <- "NK"
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_Myeloid_58cluster] <- "Myeloid"
+
+Total_Singlet_PBMC_0407_0410AB@meta.data[["Merge_Zero_celltype"]] <- Merge_Zero_celltype
+```
+
+
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Merge_58cluster_Dimplot.pdf",width = 22,height = 14)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",group.by = "Merge_Zero_celltype",label = T,shuffle = T,label.size = 5,label.box = T,repel = T,raster=FALSE)
+#dev.off()
+```
+## One hierarchy
+
+```{r}
+#B
+Merge_One_B_Naive_58cluster <- c(16,20)
+Merge_One_B_SM_58cluster <- c(13,43)
+Merge_One_B_US_58cluster <- c(40)
+Merge_One_B_Plasmablast_58cluster <- c(39)
+Merge_One_B_Regulatory_58cluster <- c(44)
+Merge_One_B_Transitional_58cluster <- c(46)
+
+#Myeloid
+Merge_One_Myeloid_cMono_58cluster <- c(14,36,23)
+Merge_One_Myeloid_cMono_Act_58cluster <- c(48)
+Merge_One_Myeloid_ncMono_58cluster <- c(26)#可再分
+Merge_One_Myeloid_pDCs_58cluster <- c(37)
+Merge_One_Myeloid_cDC2s_58cluster <- c(33)
+
+#NK
+Merge_One_NK_CD56dim_58cluster <- c(7,29)
+Merge_One_NK_CD56bright_58cluster <- c(31)
+Merge_One_NK_CD27_1_CD11b_0_58cluster <- c(49,52)
+Merge_One_NK_CD27_0_CD11b_1_58cluster <- c(17,15)
+Merge_One_NK_CD27_0_CD11b_1_Act_58cluster <- c(10)
+
+#T
+##CD4
+Merge_One_T_CD4_58cluster <- c(1,0,45,57,55,22,6,9,50,27,56,24,51,54,28,3,11,18)
+###naive
+Merge_One_T_CD4_naive_58cluster <- c(6,1,45)
+Merge_One_T_CD4_naive_act_58cluster <- c(9,57,22,50,11,27,55)
+###E memory
+Merge_One_T_CD4_EM_58cluster <- c(0,28,3)
+###Terminally Exhausted
+Merge_One_T_CD4_TE_58cluster <- c(51)
+###effector
+Merge_One_T_CD4_effector_58cluster <- c(18,54,11)
+Merge_One_T_CD4_effector_act_58cluster <- c(24,56)
+
+##CD8
+Merge_One_T_CD8_58cluster <- c(4,5,38,53,8,2,34)
+###EM
+Merge_One_T_CD8_EM_58cluster <- c(2)
+###EM_act
+Merge_One_T_CD8_EM_act_58cluster <- c(8)
+###E
+Merge_One_T_CD8_E_58cluster <- c(34)
+###Naive
+Merge_One_T_CD8_Naive_58cluster <- c(4,5,53)
+###Naive_act
+Merge_One_T_CD8_Naive_act_58cluster <- c(38)
+
+##MAIT_CD8+
+Merge_One_T_MAIT_CD8_58cluster <- c(19,21)
+##MAIT_DN
+Merge_One_T_MAIT_DN_58cluster <- c(25,30)
+##yd
+Merge_One_T_yd_58cluster <- c(12)
+##NKT
+Merge_One_T_NK_58cluster <- c(41)
+##DN
+Merge_One_T_DN_58cluster <- c(35,42)
+##DP
+Merge_One_T_DP_58cluster <- c(32)
+```
+
+### B sub
+```{r eval=TRUE,echo=TRUE}
+#结合B1 B2marker对B细胞进行注释
+One_Merge_ADT_B1 <- c("Hu.CD24","Hu.CD38-HIT2","Hu.CD19","Hu.CD20-2H7","Hu.CD21","Hu.CD22","Hu.CD1c","Hu.CD1d","Hu.CD25","Hu.CD27","Hu.CD23","Hu.IgD","Hu.CD268")
+One_Merge_ADT_B2 <- c("Hu.IgD","Hu.CD27")
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.CD24","Hu.CD38-HIT2","Hu.CD19","Hu.CD20-2H7","Hu.CD21","Hu.CD22","Hu.CD1c","Hu.CD1d","Hu.CD25","Hu.CD27","Hu.CD23","Hu.IgD","Hu.CD268"),cluster.idents = T,idents = Merge_Zero_B_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_B")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B2_58cluster_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.IgD","Hu.CD27"),cluster.idents = T,idents = Merge_Zero_B_58cluster[!Merge_Zero_B_58cluster %in% c(39)],group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_B")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+```
+### Myeloid sub
+```{r eval=TRUE,echo=TRUE}
+One_Merge_ADT_Myeloid1 <- c("Hu.CD14-M5E2","Hu.CD16","Hu.HLA.DR","Hu.CD86","Hu.CD11c","Hu.CD1c","Hu.CD83","Hu.CX3CR1","Hu.CD123")
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = One_Merge_ADT_Myeloid1,cluster.idents = T,idents = Merge_Zero_Myeloid_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_Myeloid")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+```
+
+### NK
+```{r eval=TRUE,echo=TRUE}
+One_Merge_ADT_NK <- c("Hu.CD56","Hu.CD16","Hu.CD69","Hu.CD122","Hu.CD244","Hu.CD27","Hu.CD11b")
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.CD56","Hu.CD16","Hu.CD69","Hu.CD122","Hu.CD244","Hu.CD27","Hu.CD11b"),cluster.idents = T,idents = Merge_Zero_NK_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_NK")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+#dev.off()
+```
+### T1
+```{r eval=TRUE,echo=TRUE}
+One_Merge_ADT_T <- c("Hu.CD4-RPA.T4","Hu.CD8","Hu.CD56","Hu.CD161","Hu.TCR.Vd2","Hu.TCR.Va7.2")
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf",width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.CD4-RPA.T4","Hu.CD8","Hu.CD56","Hu.CD161","Hu.TCR.Vd2","Hu.TCR.Va7.2"),cluster.idents = T,idents = Merge_Zero_T_58cluster[!Merge_Zero_T_58cluster%in%c(Merge_One_T_CD4_58cluster,Merge_One_T_CD8_58cluster,Merge_One_T_MAIT_DN_58cluster,Merge_One_T_yd_58cluster)],group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.CD56","Hu.CD3-UCHT1"),cluster.idents = T,idents = c(Merge_Zero_T_58cluster),group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_T_CD4_58cluster_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = c("Hu.CD4-RPA.T4"),raster=FALSE,repel = T,label = T)
+#dev.off()
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_T_CD8_58cluster_Featureplot.pdf",width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",features = c("Hu.CD8"),raster=FALSE,repel = T,label = T)
+#dev.off()
+```
+### T2
+```{r eval=TRUE,echo=TRUE}
+###CD4 T
+One_Merge_ADT_CD4_1 <- c("Hu.CD69","Hu.CD25","Hu.CD45RA","Hu.CD45RO","Hu.CD62L","Hu.TIGIT")
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = One_Merge_ADT_CD4_1,cluster.idents = T,idents = Merge_One_T_CD4_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_CD4_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+
+One_Merge_ADT_CD4_2 <- c("Hu.CD183","Hu.CD294","Hu.CD196","Hu.CD185","Hu.CD278","Hu.CD279","Hu.CD25")
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = c("Hu.CD183","Hu.CD196"),cluster.idents = T,idents = Merge_One_T_CD4_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_CD4_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+
+
+###CD8 T
+One_Merge_ADT_CD8 <- c("Hu.CD25","Hu.CD69","Hu.CD62L","Hu.CD197","Hu.CD45RO","Hu.CD45RA","Hu.KLRG1","Hu.CD122","Hu.TIGIT")
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = "ADT", features = One_Merge_ADT_CD8,cluster.idents = T,idents = Merge_One_T_CD8_58cluster,group.by = "wsnn_res.2") + RotatedAxis()+ggtitle("ADT_CD8_T")+  theme(plot.title = element_text(family = "serif", #字体
+                                  face = "bold",     #字体加粗
+                                  color = "black",      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )
+```
+
+
+### Annotation One
+```{r eval=TRUE,echo=TRUE}
+Merge_One_celltype <- Total_Singlet_PBMC_0407_0410AB@meta.data[["wsnn_res.2"]]
+#B
+Merge_One_B_Naive_58cluster <- c(16,20)
+Merge_One_B_SM_58cluster <- c(13,43)
+Merge_One_B_US_58cluster <- c(40)
+Merge_One_B_Plasmablast_58cluster <- c(39)
+Merge_One_B_Regulatory_58cluster <- c(44)
+Merge_One_B_Transitional_58cluster <- c(46)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Naive_58cluster] <- "Naive B"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_SM_58cluster] <- "SM B"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_US_58cluster] <- "US B"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Plasmablast_58cluster] <- "Plasmablast B"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Regulatory_58cluster] <- "Regulatory B"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Transitional_58cluster] <- "Transitional B"
+
+#Myeloid
+Merge_One_Myeloid_cMono_58cluster <- c(14,36,23)
+Merge_One_Myeloid_cMono_Act_58cluster <- c(48)
+Merge_One_Myeloid_ncMono_58cluster <- c(26)#可再分
+Merge_One_Myeloid_pDCs_58cluster <- c(37)
+Merge_One_Myeloid_cDC2s_58cluster <- c(33)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cMono_58cluster] <- "cMono"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cMono_Act_58cluster] <- "cMono Act"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_ncMono_58cluster] <- "ncMono"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_pDCs_58cluster] <- "pDCs"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cDC2s_58cluster] <- "cDC2s"
+
+#NK
+Merge_One_NK_CD56dim_58cluster <- c(7,29)
+Merge_One_NK_CD56bright_58cluster <- c(31)
+Merge_One_NK_CD27_1_CD11b_0_58cluster <- c(49,52)
+Merge_One_NK_CD27_0_CD11b_1_58cluster <- c(17,15)
+Merge_One_NK_CD27_0_CD11b_1_Act_58cluster <- c(10)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD56dim_58cluster] <- "CD56dim"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD56bright_58cluster] <- "CD56bright"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_1_CD11b_0_58cluster] <- "CD27+CD11b- NK"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_0_CD11b_1_58cluster] <- "CD27-CD11b+ NK"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_0_CD11b_1_Act_58cluster] <- "CD27-CD11b+ Activate NK"
+
+#T
+##CD4
+Merge_One_T_CD4_58cluster <- c(1,0,45,57,55,22,6,9,50,27,56,24,51,54,28,3,11,18)
+###naive
+Merge_One_T_CD4_naive_58cluster <- c(6,1,45)
+Merge_One_T_CD4_naive_act_58cluster <- c(9,57,22,50,11,27,55)
+###E memory
+Merge_One_T_CD4_EM_58cluster <- c(0,28,3)
+###Terminally Exhausted
+Merge_One_T_CD4_TE_58cluster <- c(51)
+###effector
+Merge_One_T_CD4_effector_58cluster <- c(18,54,11)
+Merge_One_T_CD4_effector_act_58cluster <- c(24,56)
+
+#levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_58cluster] <- "CD4+ T"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_naive_58cluster] <- "CD4+ naive"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_naive_act_58cluster] <- "CD4+ naive act"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_EM_58cluster] <- "CD4+ EM"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_TE_58cluster] <- "CD4+ TE"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_effector_58cluster] <- "CD4+ effector"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_effector_act_58cluster] <- "CD4+ effector act"
+
+##CD8
+Merge_One_T_CD8_58cluster <- c(4,5,38,53,8,2,34)
+###EM
+Merge_One_T_CD8_EM_58cluster <- c(2)
+###EM_act
+Merge_One_T_CD8_EM_act_58cluster <- c(8)
+###E
+Merge_One_T_CD8_E_58cluster <- c(34)
+###Naive
+Merge_One_T_CD8_Naive_58cluster <- c(4,5,53)
+###Naive_act
+Merge_One_T_CD8_Naive_act_58cluster <- c(38)
+
+#levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_58cluster] <- "CD8+ T"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_EM_58cluster] <- "CD8+ EM"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_EM_act_58cluster] <- "CD8+ EM act"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_E_58cluster] <- "CD8+ E"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_Naive_58cluster] <- "CD8+ Naive"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_Naive_act_58cluster] <- "CD8+ Naive act"
+
+##MAIT_CD8+
+Merge_One_T_MAIT_CD8_58cluster <- c(19,21)
+##MAIT_DN
+Merge_One_T_MAIT_DN_58cluster <- c(25,30)
+##yd
+Merge_One_T_yd_58cluster <- c(12)
+##NKT
+Merge_One_T_NK_58cluster <- c(41)
+##DN
+Merge_One_T_DN_58cluster <- c(35,42)
+##DP
+Merge_One_T_DP_58cluster <- c(32)
+
+
+
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_MAIT_CD8_58cluster] <- "MAIT_CD8+"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_MAIT_DN_58cluster] <- "MAIT_DN"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_yd_58cluster] <- "ydT"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_NK_58cluster] <- "NKT"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_DN_58cluster] <- "DN"
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_DP_58cluster] <- "DP"
+
+
+
+Total_Singlet_PBMC_0407_0410AB@meta.data[["Merge_One_celltype"]] <- Merge_One_celltype
+
+```
+
+```{r eval=TRUE,echo=TRUE}
+#pdf("/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_58cluster_Dimplot.pdf",width = 22,height = 14)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = "hwnn.umap",group.by = "Merge_One_celltype",label = T,label.size = 2.5,label.box = T,repel = T,raster=FALSE)
+#dev.off()
+```
+
+
+## Two hierarchy
+### FindAllMarker
+```{r eval=FALSE,echo=TRUE}
+library(future)
+plan("multicore")
+Merge_ADT_58clusters.markers <- FindAllMarkers(Total_Singlet_PBMC_0407_0410AB, only.pos = TRUE, min.pct = 0.2, logfc.threshold = 0.2,assay = "ADT")
+library(tidyverse)
+Merge_ADT_58clusters.markers.list<- Merge_ADT_58clusters.markers %>%
+    group_by(cluster) %>% 
+    filter(p_val_adj<0.05)%>%
+    slice_max(n = 10, order_by = avg_log2FC)
+write.table(Merge_ADT_58clusters.markers.list,"/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Merge_ADT_58clusters.markers.list.csv",row.names=F,col.names=T,sep = ",")
+
+
+Merge_RNA_58clusters.markers <- FindAllMarkers(Total_Singlet_PBMC_0407_0410AB, only.pos = TRUE, min.pct = 0.2, logfc.threshold = 0.2,assay = "RNA")
+library(tidyverse)
+Merge_RNA_58clusters.markers.list <- Merge_RNA_58clusters.markers %>%
+    group_by(cluster) %>% 
+    filter(p_val_adj<0.05)%>%
+    slice_max(n = 20, order_by = avg_log2FC)
+head(Merge_RNA_58clusters.markers.list)
+write.table(Merge_RNA_58clusters.markers.list,"/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Merge_RNA_58clusters.markers.list.csv",row.names=F,col.names=T,sep = ",")
+```
+
+
+
+
 
 
 

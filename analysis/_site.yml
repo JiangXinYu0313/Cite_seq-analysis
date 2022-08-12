@@ -9,6 +9,8 @@ navbar:
     href: about.html
   - text: License
     href: license.html
+  - text: merge_PBMC_0407_0410_DeBatch_annotation
+    href: merge_PBMC_0407_0410_DeBatch_annotation.html
   right:
   - icon: fab fa-github
     text: Source code
@@ -19,3 +21,4 @@ output:
     toc_float: yes
     theme: cosmo
     highlight: textmate
+    code_folding: hide
