@@ -35,6 +35,7 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
@@ -236,6 +237,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -344,6 +348,9 @@ div.tocify {
 <li>
   <a href="license.html">License</a>
 </li>
+<li>
+  <a href="merge_PBMC_0407_0410_DeBatch_annotation.html">merge_PBMC_0407_0410_DeBatch_annotation</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -360,6 +367,14 @@ div.tocify {
 
 <div id="header">
 
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">merge_PBMC_0407_0410_DeBatch_annotation</h1>
@@ -372,7 +387,7 @@ div.tocify {
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-report" data-toggle="collapse" data-target="#workflowr-report">
 <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-workflowr <span class="glyphicon glyphicon-exclamation-sign text-danger"
+workflowr <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span>
 </button>
 </p>
@@ -383,8 +398,8 @@ aria-hidden="true"></span>
 </li>
 <li>
 <a data-toggle="tab" href="#checks"> Checks <span
-class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> </a>
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span>
+</a>
 </li>
 <li>
 <a data-toggle="tab" href="#versions">Past versions</a>
@@ -393,13 +408,13 @@ aria-hidden="true"></span> </a>
 <div class="tab-content">
 <div id="summary" class="tab-pane fade in active">
 <p>
-<strong>Last updated:</strong> 2022-08-04
+<strong>Last updated:</strong> 2022-08-12
 </p>
 <p>
 <strong>Checks:</strong> <span
-class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 6
+class="glyphicon glyphicon-ok text-success" aria-hidden="true"></span> 7
 <span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> 1
+aria-hidden="true"></span> 0
 </p>
 <p>
 <strong>Knit directory:</strong> <code>Cite_seq-analysis/</code> <span
@@ -509,56 +524,30 @@ run.</p>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongabsolute">
-<span class="glyphicon glyphicon-exclamation-sign text-danger"
-aria-hidden="true"></span> <strong>File paths:</strong> absolute </a>
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongFilepathsstrongrelative">
+<span class="glyphicon glyphicon-ok text-success"
+aria-hidden="true"></span> <strong>File paths:</strong> relative </a>
 </p>
 </div>
-<div id="strongFilepathsstrongabsolute" class="panel-collapse collapse">
+<div id="strongFilepathsstrongrelative" class="panel-collapse collapse">
 <div class="panel-body">
-<p>
-Using absolute paths to the files within your workflowr project makes it
-difficult for you and others to run your code on a different machine.
-Change the absolute path(s) below to the suggested relative path(s) to
-make your code more reproducible.
-</p>
-<table class="table table-condensed table-hover">
-<thead>
-<tr>
-<th style="text-align:left;">
-absolute
-</th>
-<th style="text-align:left;">
-relative
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png
-</td>
-<td style="text-align:left;">
-analysis/images/0407_RNA_cluster_Dimplot.png
-</td>
-</tr>
-</tbody>
-</table>
+<p>Great job! Using relative paths to the files within your workflowr
+project makes it easier to run your code on other machines.</p>
 </div>
 </div>
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <p class="panel-title">
-<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree813ca4c0642544d2ad5316e3d1d3f6d71f47bd11targetblank813ca4ca">
+<a data-toggle="collapse" data-parent="#workflowr-checks" href="#strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree745c984f57ea862601b1c522975e991af6f2b009targetblank745c984a">
 <span class="glyphicon glyphicon-ok text-success"
 aria-hidden="true"></span> <strong>Repository version:</strong>
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/813ca4c0642544d2ad5316e3d1d3f6d71f47bd11" target="_blank">813ca4c</a>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/745c984f57ea862601b1c522975e991af6f2b009" target="_blank">745c984</a>
 </a>
 </p>
 </div>
 <div
-id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree813ca4c0642544d2ad5316e3d1d3f6d71f47bd11targetblank813ca4ca"
+id="strongRepositoryversionstrongahrefhttpsgithubcomJiangXinYu0313Citeseqanalysistree745c984f57ea862601b1c522975e991af6f2b009targetblank745c984a"
 class="panel-collapse collapse">
 <div class="panel-body">
 <p>
@@ -568,7 +557,7 @@ reproducibility.
 </p>
 <p>
 The results in this page were generated with repository version
-<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/813ca4c0642544d2ad5316e3d1d3f6d71f47bd11" target="_blank">813ca4c</a>.
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/tree/745c984f57ea862601b1c522975e991af6f2b009" target="_blank">745c984</a>.
 See the <em>Past versions</em> tab to see a history of the changes made
 to the R Markdown and HTML files.
 </p>
@@ -584,6 +573,9 @@ were generated:
 <pre><code>
 Ignored files:
     Ignored:    .Rproj.user/
+
+Untracked files:
+    Untracked:  code/merge_PBMC_0407_0410_DeBatch_annotation_0811.Rmd
 
 </code></pre>
 <p>
@@ -630,6 +622,40 @@ Message
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>
+Rmd
+</td>
+<td>
+<a href="https://github.com/JiangXinYu0313/Cite_seq-analysis/blob/745c984f57ea862601b1c522975e991af6f2b009/analysis/merge_PBMC_0407_0410_DeBatch_annotation.Rmd" target="_blank">745c984</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-12
+</td>
+<td>
+wflow_publish(c("analysis/merge_PBMC_0407_0410_DeBatch_annotation.Rmd",
+</td>
+</tr>
+<tr>
+<td>
+html
+</td>
+<td>
+<a href="https://rawcdn.githack.com/JiangXinYu0313/Cite_seq-analysis/f1924ad7ae70460d607fe10965380e40b4373e5e/docs/merge_PBMC_0407_0410_DeBatch_annotation.html" target="_blank">f1924ad</a>
+</td>
+<td>
+JiangXinYu0313
+</td>
+<td>
+2022-08-04
+</td>
+<td>
+Build site.
+</td>
+</tr>
 <tr>
 <td>
 html
@@ -1311,7 +1337,10 @@ JiangXinYu0313
 </table>
 </div>
 </div>
-<pre class="r"><code>#table(Singlet_total_PBMC@meta.data[[&quot;PBMC_pool_index&quot;]])</code></pre>
+<pre class="r"><code>table(Singlet_total_PBMC@meta.data[[&quot;PBMC_pool_index&quot;]])</code></pre>
+<pre><code>
+PBMC1 PBMC2 
+46346 47729 </code></pre>
 </div>
 </div>
 <div id="section" class="section level2">
@@ -1340,8 +1369,11 @@ Singlet_total_0407 &lt;- FindMultiModalNeighbors(
 Singlet_total_0407 &lt;- RunUMAP(Singlet_total_0407, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
 
 Singlet_total_0407 &lt;- FindClusters(Singlet_total_0407, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 0.2, verbose = FALSE)</code></pre>
-<pre class="r"><code>DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP&quot;)
-DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP_cluster&quot;)</code></pre>
+<pre class="r"><code>Singlet_total_0407&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407.rds&quot;)
+DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-8-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0407,reduction = &quot;wnn.umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_WNN_UMAP_cluster&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-8-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="rna-1" class="section level3">
 <h3>RNA</h3>
@@ -1361,15 +1393,14 @@ Singlet_total_0407 &lt;- RunPCA(Singlet_total_0407,features = VariableFeatures(S
 Singlet_total_0407 &lt;- FindNeighbors(Singlet_total_0407, reduction = &quot;pca&quot;, dims = 1:20)
 Singlet_total_0407 &lt;- FindClusters(Singlet_total_0407, resolution = 0.2, verbose = FALSE)
 Singlet_total_0407 &lt;- RunUMAP(Singlet_total_0407,dims = 1:20)</code></pre>
-<pre class="r"><code>png(&quot;/home/jiangxinyu/R/R_project/Cite_seq-analysis/analysis/images/0407_RNA_cluster_Dimplot.png&quot;,width = 2400,height = 1800)
-DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster&quot;)
-dev.off()
-
-#DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster&quot;)</code></pre>
-<pre class="r"><code>##去掉cluster1的细胞
+<pre class="r"><code>DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-10-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0407,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-10-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>##去掉存在批次的cluster
 Singlet_total_0407_decorrect&lt;- Singlet_total_0407[,Singlet_total_0407@meta.data[[&quot;RNA_snn_res.0.2&quot;]]!=&quot;2&quot;]</code></pre>
 <pre class="r"><code>Singlet_total_0407_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0407_decorrect.rds&quot;)
-DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;RNA_UMAP_cluster_decorrect&quot;)</code></pre>
+DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_cluster_decorrect&quot;)</code></pre>
 <p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-12-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-1">
@@ -1408,7 +1439,7 @@ JiangXinYu0313
 </table>
 </div>
 </div>
-<pre class="r"><code>DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;RNA_UMAP_decorrect&quot;)</code></pre>
+<pre class="r"><code>DimPlot(Singlet_total_0407_decorrect,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0407&quot;,raster=FALSE)+ggtitle(&quot;0407_RNA_UMAP_decorrect&quot;)</code></pre>
 <p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-12-2.png" width="672" style="display: block; margin: auto;" /></p>
 <p>
 <button type="button" class="btn btn-default btn-xs btn-workflowr btn-workflowr-fig" data-toggle="collapse" data-target="#fig-unnamed-chunk-12-2">
@@ -1455,11 +1486,64 @@ JiangXinYu0313
 </div>
 <div id="a" class="section level2">
 <h2>0410 A</h2>
+<pre class="r"><code>##0410A
+Singlet_total_0410A &lt;- merge(Singlet_0410_A1_add1,c(Singlet_0410_A3_add1,Singlet_0410_A4_add1),add.cell.ids = c(&quot;0410_A1&quot;,&quot;0410_A3&quot;,&quot;0410_A4&quot;))
+Pool_index_0410A &lt;- substr(colnames(Singlet_total_0410A),1,7)
+Singlet_total_0410A@meta.data[[&quot;Pool_index_0410A&quot;]] &lt;- Pool_index_0410A</code></pre>
 <div id="wnn-1" class="section level3">
 <h3>WNN</h3>
+<pre class="r"><code>##WNN
+DefaultAssay(Singlet_total_0410A) &lt;- &#39;RNA&#39;
+Singlet_total_0410A &lt;- NormalizeData(Singlet_total_0410A) %&gt;% FindVariableFeatures() %&gt;% ScaleData() %&gt;% RunPCA()
+
+DefaultAssay(Singlet_total_0410A) &lt;- &#39;ADT&#39;
+# we will use all ADT features for dimensional reduction
+# we set a dimensional reduction name to avoid overwriting the 
+VariableFeatures(Singlet_total_0410A) &lt;- rownames(Singlet_total_0410A[[&quot;ADT&quot;]])
+Singlet_total_0410A &lt;- NormalizeData(Singlet_total_0410A, normalization.method = &#39;CLR&#39;, margin = 2) %&gt;% 
+  ScaleData() %&gt;% RunPCA(reduction.name = &#39;apca&#39;)
+Singlet_total_0410A &lt;- FindMultiModalNeighbors(
+  Singlet_total_0410A, reduction.list = list(&quot;pca&quot;, &quot;apca&quot;), 
+  dims.list = list(1:30, 1:18), modality.weight.name = &quot;RNA.weight&quot;
+)
+
+Singlet_total_0410A &lt;- RunUMAP(Singlet_total_0410A, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
+
+Singlet_total_0410A &lt;- FindClusters(Singlet_total_0410A, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 0.2, verbose = FALSE)</code></pre>
+<pre class="r"><code>Singlet_total_0410A&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A.rds&quot;)
+DimPlot(Singlet_total_0410A,reduction = &quot;wnn.umap&quot;,group.by = &quot;Pool_index_0410A&quot;,raster=FALSE)+ggtitle(&quot;WNN_UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-15-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0410A,reduction = &quot;wnn.umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;WNN_UMAP_cluster&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-15-2.png" width="672" style="display: block; margin: auto;" /></p>
 </div>
 <div id="rna-2" class="section level3">
 <h3>RNA</h3>
+<pre class="r"><code>##RNA cluster
+Singlet_total_0410A@active.assay &lt;- &quot;RNA&quot;
+
+# Select the top 1000 most variable features
+Singlet_total_0410A &lt;- FindVariableFeatures(Singlet_total_0410A)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0410A &lt;- ScaleData(Singlet_total_0410A, features = VariableFeatures(Singlet_total_0410A))
+
+# Run PCA
+Singlet_total_0410A &lt;- RunPCA(Singlet_total_0410A,features = VariableFeatures(Singlet_total_0410A))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0410A &lt;- FindNeighbors(Singlet_total_0410A, reduction = &quot;pca&quot;, dims = 1:20)
+Singlet_total_0410A &lt;- FindClusters(Singlet_total_0410A, resolution = 0.2, verbose = FALSE)
+Singlet_total_0410A &lt;- RunUMAP(Singlet_total_0410A,dims = 1:20)</code></pre>
+<pre class="r"><code>DimPlot(Singlet_total_0410A,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0410A&quot;,raster=FALSE)+ggtitle(&quot;RNA_UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Singlet_total_0410A,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;WNN_UMAP_clusster&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-17-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>table(Singlet_total_0410A@meta.data[[&quot;Pool_index_0410A&quot;]])</code></pre>
+<pre><code>
+0410_A1 0410_A3 0410_A4 
+  33527   37168   37997 </code></pre>
+<pre class="r"><code>##去掉有批次cluster的细胞
+Singlet_total_0410A_decorrect&lt;- Singlet_total_0410A[,Singlet_total_0410A@meta.data[[&quot;RNA_snn_res.0.2&quot;]]!=&quot;5&quot;]</code></pre>
 <pre class="r"><code>Singlet_total_0410A_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410A_decorrect.rds&quot;)
 DimPlot(Singlet_total_0410A_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;RNA_UMAP_cluster_decorrect&quot;)</code></pre>
 <p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-19-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1558,8 +1642,42 @@ JiangXinYu0313
 </div>
 <div id="b" class="section level2">
 <h2>0410 B</h2>
+<pre class="r"><code>##0410B
+Singlet_total_0410B &lt;- merge(Singlet_0410_B1_add2,c(Singlet_0410_B2_add2,Singlet_0410_B3_add2,Singlet_0410_B4_add2),add.cell.ids = c(&quot;0410_B1&quot;,&quot;0410_B2&quot;,&quot;0410_B3&quot;,&quot;0410_B4&quot;))
+Pool_index_0410B &lt;- substr(colnames(Singlet_total_0410B),1,7)
+Singlet_total_0410B@meta.data[[&quot;Pool_index_0410B&quot;]] &lt;- Pool_index_0410B
+table(Pool_index_0410B)</code></pre>
 <div id="rna-3" class="section level3">
 <h3>RNA</h3>
+<pre class="r"><code>##RNA cluster
+Singlet_total_0410B@active.assay &lt;- &quot;RNA&quot;
+
+# Select the top 1000 most variable features
+Singlet_total_0410B &lt;- FindVariableFeatures(Singlet_total_0410B)
+
+# Scaling RNA data, we only scale the variable features here for efficiency
+Singlet_total_0410B &lt;- ScaleData(Singlet_total_0410B, features = VariableFeatures(Singlet_total_0410B))
+
+# Run PCA
+Singlet_total_0410B &lt;- RunPCA(Singlet_total_0410B,features = VariableFeatures(Singlet_total_0410B))
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Singlet_total_0410B &lt;- FindNeighbors(Singlet_total_0410B, reduction = &quot;pca&quot;, dims = 1:20)
+Singlet_total_0410B &lt;- FindClusters(Singlet_total_0410B, resolution = 0.2, verbose = FALSE)
+Singlet_total_0410B &lt;- RunUMAP(Singlet_total_0410B,dims = 1:20)</code></pre>
+<pre class="r"><code>Singlet_total_0410B&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410B.rds&quot;)
+#pdf(&quot;/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf&quot;,width = 18,height = 12)
+DimPlot(Singlet_total_0410B,reduction = &quot;umap&quot;,group.by = &quot;Pool_index_0410B&quot;,raster=FALSE)+ggtitle(&quot;0410B_RNA_UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-22-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+DimPlot(Singlet_total_0410B,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0410B_RNA_UMAP_cluster&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-22-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>table(Singlet_total_0410B@meta.data[[&quot;Pool_index_0410B&quot;]])</code></pre>
+<pre><code>
+0410_B1 0410_B2 0410_B3 0410_B4 
+  35294   37322   32426   40442 </code></pre>
+<pre class="r"><code>##去掉有批次cluster的细胞
+Singlet_total_0410B_decorrect&lt;- Singlet_total_0410B[,Singlet_total_0410B@meta.data[[&quot;RNA_snn_res.0.2&quot;]]!=&quot;5&quot;]</code></pre>
 <pre class="r"><code>Singlet_total_0410B_decorrect&lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Singlet_total_0410B_decorrect.rds&quot;)
 DimPlot(Singlet_total_0410B_decorrect,reduction = &quot;umap&quot;,label = T,raster=FALSE)+ggtitle(&quot;0410B_RNA_UMAP_cluster_decorrect&quot;)</code></pre>
 <p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-24-1.png" width="672" style="display: block; margin: auto;" /></p>
@@ -1647,6 +1765,641 @@ JiangXinYu0313
 </div>
 <div id="merge" class="section level2">
 <h2>merge</h2>
+<pre class="r"><code>#理出来的数据：Singlet_total_PBMC  Singlet_total_0407_decorrect Singlet_total_0410A_decorrect  Singlet_total_0410B_decorrect
+Singlet_total_PBMC@meta.data[[&quot;HTO_maxID&quot;]] &lt;- gsub(&quot; &quot;,&quot;.&quot;,paste(&quot;PBMC&quot;,Singlet_total_PBMC@meta.data[[&quot;HTO_maxID&quot;]]))
+Singlet_total_0407_decorrect@meta.data[[&quot;HTO_maxID&quot;]] &lt;- gsub(&quot; &quot;,&quot;.&quot;,paste(&quot;0407&quot;,Singlet_total_0407_decorrect@meta.data[[&quot;HTO_maxID&quot;]]))
+Singlet_total_0410A_decorrect@meta.data[[&quot;HTO_maxID&quot;]] &lt;- gsub(&quot; &quot;,&quot;.&quot;,paste(&quot;0410A&quot;,Singlet_total_0410A_decorrect@meta.data[[&quot;HTO_maxID&quot;]]))
+Singlet_total_0410B_decorrect@meta.data[[&quot;HTO_maxID&quot;]] &lt;- gsub(&quot; &quot;,&quot;.&quot;,paste(&quot;0410B&quot;,Singlet_total_0410B_decorrect@meta.data[[&quot;HTO_maxID&quot;]]))
+
+
+Total_Singlet_PBMC_0407_0410AB &lt;- merge(Singlet_total_PBMC,c(Singlet_total_0407_decorrect,Singlet_total_0410B_decorrect,Singlet_total_0410A_decorrect),add.cell.ids = c(&quot;PBMC&quot;,&quot;0407&quot;,&quot;0410B&quot;,&quot;0410A&quot;))
+lot &lt;- substr(colnames(Total_Singlet_PBMC_0407_0410AB),1,4)
+Total_Singlet_PBMC_0407_0410AB@meta.data[[&quot;lot&quot;]] &lt;- lot</code></pre>
+</div>
+</div>
+<div id="clustering-batch-effect-correction" class="section level1">
+<h1>clustering &amp; Batch effect correction</h1>
+<pre class="r"><code>Total_Singlet_PBMC_0407_0410AB &lt;- readRDS(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Total_Singlet_PBMC_0407_0410AB.rds&quot;)</code></pre>
+<div id="wnn-2" class="section level2">
+<h2>WNN</h2>
+<pre class="r"><code>DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;RNA&#39;
+Total_Singlet_PBMC_0407_0410AB &lt;- NormalizeData(Total_Singlet_PBMC_0407_0410AB) %&gt;% FindVariableFeatures() %&gt;% ScaleData() %&gt;% RunPCA(reduction.name = &#39;RNA.PCA&#39;)
+
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+VariableFeatures(Total_Singlet_PBMC_0407_0410AB) &lt;- rownames(Total_Singlet_PBMC_0407_0410AB[[&quot;ADT&quot;]])
+Total_Singlet_PBMC_0407_0410AB &lt;- NormalizeData(Total_Singlet_PBMC_0407_0410AB, normalization.method = &#39;CLR&#39;, margin = 2) %&gt;% ScaleData() %&gt;% RunPCA(reduction.name = &#39;ADT.PCA&#39;)
+
+Total_Singlet_PBMC_0407_0410AB &lt;- FindMultiModalNeighbors(
+  Total_Singlet_PBMC_0407_0410AB, reduction.list = list(&quot;RNA.PCA&quot;, &quot;ADT.PCA&quot;), 
+  dims.list = list(1:30, 1:18), modality.weight.name = &quot;RNA.weight&quot;
+)
+
+Total_Singlet_PBMC_0407_0410AB &lt;- RunUMAP(Total_Singlet_PBMC_0407_0410AB, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;wnn.umap&quot;, reduction.key = &quot;wnnUMAP_&quot;)
+
+Total_Singlet_PBMC_0407_0410AB &lt;- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 2, verbose = FALSE)</code></pre>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,group.by = &quot;lot&quot;,label = T,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;WNN UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-28-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Zero_B_ADT &lt;- c(&quot;Hu.CD19&quot;)#CD19+
+Zero_Plasma_GEX &lt;- c(&quot;MZB1&quot;,&quot;CD79A&quot;,&quot;IGHG1&quot;,&quot;SDC1&quot;)
+Zero_T_ADT &lt;- c(&quot;Hu.CD3-UCHT1&quot;)
+Zero_T_GEX &lt;- c(&quot;CD3D&quot;,&quot;CD3E&quot;,&quot;CD3G&quot;)
+Zero_NK_ADT &lt;- c(&quot;Hu.CD3-UCHT1&quot;,&quot;Hu.CD16&quot;,&quot;Hu.CD56&quot;)#CD3- CD16+ CD56+
+Zero_Mega_ADT &lt;- c(&quot;Hu.CD42b&quot;,&quot;Hu.CD41&quot;)#CD42b+ CD41+
+Zero_Myeloid_ADT &lt;- c(&quot;Hu.CD11b&quot;)#CD11b+
+Zero_Myeloid_GEX &lt;- c(&quot;CTS3&quot;,&quot;LYZ&quot;)
+Zero_RBC_GEX &lt;- c(&quot;HBB&quot;,&quot;HBA2&quot;,&quot;HBA1&quot;)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = Zero_B_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = Zero_T_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = &quot;Hu.CD4-RPA.T4&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = &quot;Hu.CD8&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = Zero_Myeloid_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = &quot;Hu.CD16&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,features = &quot;Hu.CD56&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-29-7.png" width="672" style="display: block; margin: auto;" />
+## RNA</p>
+<pre class="r"><code>##RNA cluster
+library(future)
+library(ggplot2)
+plan(&quot;multicore&quot;, workers = 8)
+Total_Singlet_PBMC_0407_0410AB@active.assay &lt;- &quot;RNA&quot;
+
+# Select the top 1000 most variable features
+# Total_Singlet_PBMC_0407_0410AB &lt;- FindVariableFeatures(Total_Singlet_PBMC_0407_0410AB)
+# 
+# # Scaling RNA data, we only scale the variable features here for efficiency
+# Total_Singlet_PBMC_0407_0410AB &lt;- ScaleData(Total_Singlet_PBMC_0407_0410AB, features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB))
+# 
+# # Run PCA
+# Total_Singlet_PBMC_0407_0410AB &lt;- RunPCA(Total_Singlet_PBMC_0407_0410AB,features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB),reduction.name = &quot;RNA.PCA&quot;)
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Total_Singlet_PBMC_0407_0410AB &lt;- FindNeighbors(Total_Singlet_PBMC_0407_0410AB, reduction = &quot;RNA.PCA&quot;, dims = 1:20)
+Total_Singlet_PBMC_0407_0410AB &lt;- FindClusters(Total_Singlet_PBMC_0407_0410AB, resolution = 0.2, verbose = FALSE)
+Total_Singlet_PBMC_0407_0410AB &lt;- RunUMAP(Total_Singlet_PBMC_0407_0410AB,dims = 1:20,reduction = &quot;RNA.PCA&quot;,reduction.name = &quot;RNA.UMAP&quot;)</code></pre>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf&quot;,width = 18,height = 12)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.PCA&quot;,group.by = &quot;lot&quot;,raster=FALSE,label.box = T,repel = T)+ggtitle(&quot;RNA PCA&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-31-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,group.by = &quot;lot&quot;,raster=FALSE,label.box = T,repel = T)+ggtitle(&quot;RNA UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-31-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plan(&quot;multicore&quot;)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = Zero_B_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = Zero_T_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = &quot;Hu.CD4-RPA.T4&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = &quot;Hu.CD8&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = Zero_Myeloid_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = &quot;Hu.CD16&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;RNA.UMAP&quot;,features = &quot;Hu.CD56&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-32-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="adt" class="section level2">
+<h2>ADT</h2>
+<pre class="r"><code>library(future)
+plan(sequential)
+Total_Singlet_PBMC_0407_0410AB@active.assay &lt;- &quot;ADT&quot;
+
+# Select the top 1000 most variable features
+# Total_Singlet_PBMC_0407_0410AB &lt;- FindVariableFeatures(Total_Singlet_PBMC_0407_0410AB)
+# 
+# # Scaling RNA data, we only scale the variable features here for efficiency
+# Total_Singlet_PBMC_0407_0410AB &lt;- ScaleData(Total_Singlet_PBMC_0407_0410AB, features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB))
+# 
+# # Run PCA
+Total_Singlet_PBMC_0407_0410AB &lt;- RunPCA(Total_Singlet_PBMC_0407_0410AB,features = VariableFeatures(Total_Singlet_PBMC_0407_0410AB),reduction.name = &quot;ADT.PCA&quot;)
+
+# We select the top 10 PCs for clustering and tSNE based on PCElbowPlot
+Total_Singlet_PBMC_0407_0410AB &lt;- FindNeighbors(Total_Singlet_PBMC_0407_0410AB, reduction = &quot;ADT.PCA&quot;, dims = 1:20)
+Total_Singlet_PBMC_0407_0410AB &lt;- FindClusters(Total_Singlet_PBMC_0407_0410AB, resolution = 0.2, verbose = FALSE)
+Total_Singlet_PBMC_0407_0410AB &lt;- RunUMAP(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.PCA&quot;,reduction.name = &quot;ADT.UMAP&quot;, reduction.key = &quot;adtUMAP_&quot;,dims = 1:20)</code></pre>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/Batch_outs/0410B_add2_Batch_Dimplot.pdf&quot;,width = 18,height = 12)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.PCA&quot;,group.by = &quot;lot&quot;,raster=FALSE,label.box = T,repel = T)+ggtitle(&quot;ADT PCA&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-34-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,group.by = &quot;lot&quot;,raster=FALSE,label.box = T,repel = T)+ggtitle(&quot;ADT UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-34-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plan(&quot;multicore&quot;)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = Zero_B_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = Zero_T_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = &quot;Hu.CD4-RPA.T4&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = &quot;Hu.CD8&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = Zero_Myeloid_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = &quot;Hu.CD16&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.UMAP&quot;,features = &quot;Hu.CD56&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-35-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="harmonyadt" class="section level2">
+<h2>harmony(ADT)</h2>
+<pre class="r"><code>library(harmony)
+library(ggplot2)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+Total_Singlet_PBMC_0407_0410AB &lt;- Total_Singlet_PBMC_0407_0410AB %&gt;% RunHarmony(&quot;lot&quot;,reduction = &quot;ADT.PCA&quot;,reduction.save = &quot;ADT_harmony.PCA&quot;,plot_convergence = TRUE)</code></pre>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;ADT.PCA&quot;,group.by = &quot;lot&quot;,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;non-harmony&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-37-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(object = Total_Singlet_PBMC_0407_0410AB, reduction = &quot;ADT_harmony.PCA&quot;, pt.size = .1, group.by = &quot;lot&quot;,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;harmony&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-37-2.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="wnn-after-harmony" class="section level2">
+<h2>WNN after harmony</h2>
+<pre class="r"><code>plan(&quot;multicore&quot;, workers = 32)
+Total_Singlet_PBMC_0407_0410AB &lt;- FindMultiModalNeighbors(
+  Total_Singlet_PBMC_0407_0410AB, reduction.list = list(&quot;RNA.PCA&quot;, &quot;harmony&quot;), 
+  dims.list = list(1:30, 1:18), modality.weight.name = &quot;RNA.weight&quot;
+)
+
+Total_Singlet_PBMC_0407_0410AB &lt;- RunUMAP(Total_Singlet_PBMC_0407_0410AB, nn.name = &quot;weighted.nn&quot;, reduction.name = &quot;hwnn.umap&quot;, reduction.key = &quot;hwnnUMAP_&quot;)
+##non-cluster
+# Total_Singlet_PBMC_0407_0410AB &lt;- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 5, verbose = FALSE)</code></pre>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;wnn.umap&quot;,group.by = &quot;lot&quot;,label = T,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;WNN UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-39-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,group.by = &quot;lot&quot;,label = T,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;harmony+WNN UMAP&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-39-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>plan(&quot;multicore&quot;)
+DefaultAssay(Total_Singlet_PBMC_0407_0410AB) &lt;- &#39;ADT&#39;
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_B_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_T_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = &quot;Hu.CD4-RPA.T4&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = &quot;Hu.CD8&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_Myeloid_ADT,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-5.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = &quot;Hu.CD16&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-6.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = &quot;Hu.CD56&quot;,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-40-7.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="wnn-cluster-annotation" class="section level1">
+<h1>WNN cluster &amp; Annotation</h1>
+<pre class="r"><code>Total_Singlet_PBMC_0407_0410AB &lt;- FindClusters(Total_Singlet_PBMC_0407_0410AB, graph.name = &quot;wsnn&quot;, algorithm = 3, resolution = 2, verbose = FALSE)</code></pre>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/merge_hwnn_58_clusters_Dimplot.pdf&quot;,width = 22,height = 18)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,label = T,label.box = T,repel = T,raster=FALSE)+ggtitle(&quot;hWNN_58_Clusters&quot;)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-42-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+<div id="zero-hierarchy" class="section level2">
+<h2>Zero hierarchy</h2>
+<div id="zero-adt-marker" class="section level3">
+<h3>Zero ADT marker</h3>
+<pre class="r"><code>Zero_B_ADT &lt;- c(&quot;Hu.CD19&quot;)#CD19+
+Zero_Plasma_GEX &lt;- c(&quot;MZB1&quot;,&quot;CD79A&quot;,&quot;IGHG1&quot;,&quot;SDC1&quot;)
+Zero_T_ADT &lt;- c(&quot;Hu.CD3-UCHT1&quot;)
+Zero_T_GEX &lt;- c(&quot;CD3D&quot;,&quot;CD3E&quot;,&quot;CD3G&quot;)
+Zero_NK_ADT &lt;- c(&quot;Hu.CD3-UCHT1&quot;,&quot;Hu.CD16&quot;,&quot;Hu.CD56&quot;)#CD3- CD16+ CD56+
+Zero_Mega_ADT &lt;- c(&quot;Hu.CD42b&quot;,&quot;Hu.CD41&quot;)#CD42b+ CD41+
+Zero_Myeloid_ADT &lt;- c(&quot;Hu.CD11b&quot;)#CD11b+
+Zero_Myeloid_GEX &lt;- c(&quot;CTS3&quot;,&quot;LYZ&quot;)
+Zero_RBC_GEX &lt;- c(&quot;HBB&quot;,&quot;HBA2&quot;,&quot;HBA1&quot;)</code></pre>
+</div>
+<div id="b-1" class="section level3">
+<h3>B</h3>
+<pre class="r"><code>DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = Zero_B_ADT,cluster.idents = T,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_B&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-44-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_B_Merge_ADT_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_B_ADT,raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-44-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="t" class="section level3">
+<h3>T</h3>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_T_Merge_ADT_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = Zero_T_ADT,cluster.idents = T,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-45-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_T_Merge_ADT_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_T_ADT,raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-45-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="nk" class="section level3">
+<h3>NK</h3>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = Zero_NK_ADT,cluster.idents = T,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_NK&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-46-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_CD16_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_NK_ADT[2],raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-46-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_NK_Merge_ADT_CD56_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_NK_ADT[3],raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-46-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="myeloid" class="section level3">
+<h3>Myeloid</h3>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Myeloid_Merge_ADT_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = Zero_Myeloid_ADT,cluster.idents = T,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_Myeloid&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-47-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Myeloid_Merge_ADT_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_Myeloid_ADT,raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-47-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = Zero_Mega_ADT[2],raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-47-3.png" width="672" style="display: block; margin: auto;" />
+### Unkonw</p>
+<pre class="r"><code>library(future)
+plan(&quot;multicore&quot;)
+Total_Singlet_PBMC_0407_0410AB@active.assay &lt;- &quot;ADT&quot;
+Zero_47_ADT.marker&lt;- FindMarkers(Total_Singlet_PBMC_0407_0410AB,ident.1 = 47, min.pct = 0.25)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = c(&quot;Hu.CD71&quot;),raster=FALSE,repel = T,label = T)</code></pre>
+</div>
+<div id="annotation-zero" class="section level3">
+<h3>Annotation Zero</h3>
+<pre class="r"><code>Merge_Zero_B_58cluster &lt;- c(13,16,20,39,40,43,44,46)
+Merge_Zero_T_58cluster &lt;- c(4,5,38,53,1,6,9,22,27,45,50,55,57,0,3,11,34,56,24,51,54,28,25,8,19,12,2,32,21,41,42,18,30,35)
+Merge_Zero_NK_58cluster &lt;- c(7,10,15,17,29,31,49,52)
+Merge_Zero_Myeloid_58cluster &lt;- c(14,48,23,36,26,33,37)#37可能是Mega 47 Unknow
+
+Merge_Zero_celltype &lt;- Total_Singlet_PBMC_0407_0410AB@meta.data[[&quot;wsnn_res.2&quot;]]
+
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_B_58cluster] &lt;- &quot;B&quot;
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_T_58cluster] &lt;- &quot;T&quot;
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_NK_58cluster] &lt;- &quot;NK&quot;
+levels(Merge_Zero_celltype)[levels(Merge_Zero_celltype) %in% Merge_Zero_Myeloid_58cluster] &lt;- &quot;Myeloid&quot;
+
+Total_Singlet_PBMC_0407_0410AB@meta.data[[&quot;Merge_Zero_celltype&quot;]] &lt;- Merge_Zero_celltype</code></pre>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Zero/Zero_Merge_58cluster_Dimplot.pdf&quot;,width = 22,height = 14)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,group.by = &quot;Merge_Zero_celltype&quot;,label = T,shuffle = T,label.size = 5,label.box = T,repel = T,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-50-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+</div>
+<div id="one-hierarchy" class="section level2">
+<h2>One hierarchy</h2>
+<pre class="r"><code>#B
+Merge_One_B_Naive_58cluster &lt;- c(16,20)
+Merge_One_B_SM_58cluster &lt;- c(13,43)
+Merge_One_B_US_58cluster &lt;- c(40)
+Merge_One_B_Plasmablast_58cluster &lt;- c(39)
+Merge_One_B_Regulatory_58cluster &lt;- c(44)
+Merge_One_B_Transitional_58cluster &lt;- c(46)
+
+#Myeloid
+Merge_One_Myeloid_cMono_58cluster &lt;- c(14,36,23)
+Merge_One_Myeloid_cMono_Act_58cluster &lt;- c(48)
+Merge_One_Myeloid_ncMono_58cluster &lt;- c(26)#可再分
+Merge_One_Myeloid_pDCs_58cluster &lt;- c(37)
+Merge_One_Myeloid_cDC2s_58cluster &lt;- c(33)
+
+#NK
+Merge_One_NK_CD56dim_58cluster &lt;- c(7,29)
+Merge_One_NK_CD56bright_58cluster &lt;- c(31)
+Merge_One_NK_CD27_1_CD11b_0_58cluster &lt;- c(49,52)
+Merge_One_NK_CD27_0_CD11b_1_58cluster &lt;- c(17,15)
+Merge_One_NK_CD27_0_CD11b_1_Act_58cluster &lt;- c(10)
+
+#T
+##CD4
+Merge_One_T_CD4_58cluster &lt;- c(1,0,45,57,55,22,6,9,50,27,56,24,51,54,28,3,11,18)
+###naive
+Merge_One_T_CD4_naive_58cluster &lt;- c(6,1,45)
+Merge_One_T_CD4_naive_act_58cluster &lt;- c(9,57,22,50,11,27,55)
+###E memory
+Merge_One_T_CD4_EM_58cluster &lt;- c(0,28,3)
+###Terminally Exhausted
+Merge_One_T_CD4_TE_58cluster &lt;- c(51)
+###effector
+Merge_One_T_CD4_effector_58cluster &lt;- c(18,54,11)
+Merge_One_T_CD4_effector_act_58cluster &lt;- c(24,56)
+
+##CD8
+Merge_One_T_CD8_58cluster &lt;- c(4,5,38,53,8,2,34)
+###EM
+Merge_One_T_CD8_EM_58cluster &lt;- c(2)
+###EM_act
+Merge_One_T_CD8_EM_act_58cluster &lt;- c(8)
+###E
+Merge_One_T_CD8_E_58cluster &lt;- c(34)
+###Naive
+Merge_One_T_CD8_Naive_58cluster &lt;- c(4,5,53)
+###Naive_act
+Merge_One_T_CD8_Naive_act_58cluster &lt;- c(38)
+
+##MAIT_CD8+
+Merge_One_T_MAIT_CD8_58cluster &lt;- c(19,21)
+##MAIT_DN
+Merge_One_T_MAIT_DN_58cluster &lt;- c(25,30)
+##yd
+Merge_One_T_yd_58cluster &lt;- c(12)
+##NKT
+Merge_One_T_NK_58cluster &lt;- c(41)
+##DN
+Merge_One_T_DN_58cluster &lt;- c(35,42)
+##DP
+Merge_One_T_DP_58cluster &lt;- c(32)</code></pre>
+<div id="b-sub" class="section level3">
+<h3>B sub</h3>
+<pre class="r"><code>#结合B1 B2marker对B细胞进行注释
+One_Merge_ADT_B1 &lt;- c(&quot;Hu.CD24&quot;,&quot;Hu.CD38-HIT2&quot;,&quot;Hu.CD19&quot;,&quot;Hu.CD20-2H7&quot;,&quot;Hu.CD21&quot;,&quot;Hu.CD22&quot;,&quot;Hu.CD1c&quot;,&quot;Hu.CD1d&quot;,&quot;Hu.CD25&quot;,&quot;Hu.CD27&quot;,&quot;Hu.CD23&quot;,&quot;Hu.IgD&quot;,&quot;Hu.CD268&quot;)
+One_Merge_ADT_B2 &lt;- c(&quot;Hu.IgD&quot;,&quot;Hu.CD27&quot;)
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.CD24&quot;,&quot;Hu.CD38-HIT2&quot;,&quot;Hu.CD19&quot;,&quot;Hu.CD20-2H7&quot;,&quot;Hu.CD21&quot;,&quot;Hu.CD22&quot;,&quot;Hu.CD1c&quot;,&quot;Hu.CD1d&quot;,&quot;Hu.CD25&quot;,&quot;Hu.CD27&quot;,&quot;Hu.CD23&quot;,&quot;Hu.IgD&quot;,&quot;Hu.CD268&quot;),cluster.idents = T,idents = Merge_Zero_B_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_B&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-52-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B2_58cluster_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.IgD&quot;,&quot;Hu.CD27&quot;),cluster.idents = T,idents = Merge_Zero_B_58cluster[!Merge_Zero_B_58cluster %in% c(39)],group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_B&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-52-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="myeloid-sub" class="section level3">
+<h3>Myeloid sub</h3>
+<pre class="r"><code>One_Merge_ADT_Myeloid1 &lt;- c(&quot;Hu.CD14-M5E2&quot;,&quot;Hu.CD16&quot;,&quot;Hu.HLA.DR&quot;,&quot;Hu.CD86&quot;,&quot;Hu.CD11c&quot;,&quot;Hu.CD1c&quot;,&quot;Hu.CD83&quot;,&quot;Hu.CX3CR1&quot;,&quot;Hu.CD123&quot;)
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = One_Merge_ADT_Myeloid1,cluster.idents = T,idents = Merge_Zero_Myeloid_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_Myeloid&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-53-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="nk-1" class="section level3">
+<h3>NK</h3>
+<pre class="r"><code>One_Merge_ADT_NK &lt;- c(&quot;Hu.CD56&quot;,&quot;Hu.CD16&quot;,&quot;Hu.CD69&quot;,&quot;Hu.CD122&quot;,&quot;Hu.CD244&quot;,&quot;Hu.CD27&quot;,&quot;Hu.CD11b&quot;)
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.CD56&quot;,&quot;Hu.CD16&quot;,&quot;Hu.CD69&quot;,&quot;Hu.CD122&quot;,&quot;Hu.CD244&quot;,&quot;Hu.CD27&quot;,&quot;Hu.CD11b&quot;),cluster.idents = T,idents = Merge_Zero_NK_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_NK&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-54-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="t1" class="section level3">
+<h3>T1</h3>
+<pre class="r"><code>One_Merge_ADT_T &lt;- c(&quot;Hu.CD4-RPA.T4&quot;,&quot;Hu.CD8&quot;,&quot;Hu.CD56&quot;,&quot;Hu.CD161&quot;,&quot;Hu.TCR.Vd2&quot;,&quot;Hu.TCR.Va7.2&quot;)
+
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_B1_58cluster_Dotplot.pdf&quot;,width = 22,height = 14)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.CD4-RPA.T4&quot;,&quot;Hu.CD8&quot;,&quot;Hu.CD56&quot;,&quot;Hu.CD161&quot;,&quot;Hu.TCR.Vd2&quot;,&quot;Hu.TCR.Va7.2&quot;),cluster.idents = T,idents = Merge_Zero_T_58cluster[!Merge_Zero_T_58cluster%in%c(Merge_One_T_CD4_58cluster,Merge_One_T_CD8_58cluster,Merge_One_T_MAIT_DN_58cluster,Merge_One_T_yd_58cluster)],group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-55-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.CD56&quot;,&quot;Hu.CD3-UCHT1&quot;),cluster.idents = T,idents = c(Merge_Zero_T_58cluster),group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-55-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_T_CD4_58cluster_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = c(&quot;Hu.CD4-RPA.T4&quot;),raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-55-3.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()
+#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_T_CD8_58cluster_Featureplot.pdf&quot;,width = 22,height = 14)
+FeaturePlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,features = c(&quot;Hu.CD8&quot;),raster=FALSE,repel = T,label = T)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-55-4.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+<div id="t2" class="section level3">
+<h3>T2</h3>
+<pre class="r"><code>###CD4 T
+One_Merge_ADT_CD4_1 &lt;- c(&quot;Hu.CD69&quot;,&quot;Hu.CD25&quot;,&quot;Hu.CD45RA&quot;,&quot;Hu.CD45RO&quot;,&quot;Hu.CD62L&quot;,&quot;Hu.TIGIT&quot;)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = One_Merge_ADT_CD4_1,cluster.idents = T,idents = Merge_One_T_CD4_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_CD4_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-56-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>One_Merge_ADT_CD4_2 &lt;- c(&quot;Hu.CD183&quot;,&quot;Hu.CD294&quot;,&quot;Hu.CD196&quot;,&quot;Hu.CD185&quot;,&quot;Hu.CD278&quot;,&quot;Hu.CD279&quot;,&quot;Hu.CD25&quot;)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = c(&quot;Hu.CD183&quot;,&quot;Hu.CD196&quot;),cluster.idents = T,idents = Merge_One_T_CD4_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_CD4_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-56-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>###CD8 T
+One_Merge_ADT_CD8 &lt;- c(&quot;Hu.CD25&quot;,&quot;Hu.CD69&quot;,&quot;Hu.CD62L&quot;,&quot;Hu.CD197&quot;,&quot;Hu.CD45RO&quot;,&quot;Hu.CD45RA&quot;,&quot;Hu.KLRG1&quot;,&quot;Hu.CD122&quot;,&quot;Hu.TIGIT&quot;)
+DotPlot(Total_Singlet_PBMC_0407_0410AB,assay = &quot;ADT&quot;, features = One_Merge_ADT_CD8,cluster.idents = T,idents = Merge_One_T_CD8_58cluster,group.by = &quot;wsnn_res.2&quot;) + RotatedAxis()+ggtitle(&quot;ADT_CD8_T&quot;)+  theme(plot.title = element_text(family = &quot;serif&quot;, #字体
+                                  face = &quot;bold&quot;,     #字体加粗
+                                  color = &quot;black&quot;,      #字体颜色
+                                  size = 15,          #字体大小
+                                  hjust = 0.5,          #字体左右的位置
+                                  vjust = 0.5,          #字体上下的高度
+                                  angle = 0), )</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-56-3.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+<div id="annotation-one" class="section level3">
+<h3>Annotation One</h3>
+<pre class="r"><code>Merge_One_celltype &lt;- Total_Singlet_PBMC_0407_0410AB@meta.data[[&quot;wsnn_res.2&quot;]]
+#B
+Merge_One_B_Naive_58cluster &lt;- c(16,20)
+Merge_One_B_SM_58cluster &lt;- c(13,43)
+Merge_One_B_US_58cluster &lt;- c(40)
+Merge_One_B_Plasmablast_58cluster &lt;- c(39)
+Merge_One_B_Regulatory_58cluster &lt;- c(44)
+Merge_One_B_Transitional_58cluster &lt;- c(46)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Naive_58cluster] &lt;- &quot;Naive B&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_SM_58cluster] &lt;- &quot;SM B&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_US_58cluster] &lt;- &quot;US B&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Plasmablast_58cluster] &lt;- &quot;Plasmablast B&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Regulatory_58cluster] &lt;- &quot;Regulatory B&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_B_Transitional_58cluster] &lt;- &quot;Transitional B&quot;
+
+#Myeloid
+Merge_One_Myeloid_cMono_58cluster &lt;- c(14,36,23)
+Merge_One_Myeloid_cMono_Act_58cluster &lt;- c(48)
+Merge_One_Myeloid_ncMono_58cluster &lt;- c(26)#可再分
+Merge_One_Myeloid_pDCs_58cluster &lt;- c(37)
+Merge_One_Myeloid_cDC2s_58cluster &lt;- c(33)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cMono_58cluster] &lt;- &quot;cMono&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cMono_Act_58cluster] &lt;- &quot;cMono Act&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_ncMono_58cluster] &lt;- &quot;ncMono&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_pDCs_58cluster] &lt;- &quot;pDCs&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_Myeloid_cDC2s_58cluster] &lt;- &quot;cDC2s&quot;
+
+#NK
+Merge_One_NK_CD56dim_58cluster &lt;- c(7,29)
+Merge_One_NK_CD56bright_58cluster &lt;- c(31)
+Merge_One_NK_CD27_1_CD11b_0_58cluster &lt;- c(49,52)
+Merge_One_NK_CD27_0_CD11b_1_58cluster &lt;- c(17,15)
+Merge_One_NK_CD27_0_CD11b_1_Act_58cluster &lt;- c(10)
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD56dim_58cluster] &lt;- &quot;CD56dim&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD56bright_58cluster] &lt;- &quot;CD56bright&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_1_CD11b_0_58cluster] &lt;- &quot;CD27+CD11b- NK&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_0_CD11b_1_58cluster] &lt;- &quot;CD27-CD11b+ NK&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_NK_CD27_0_CD11b_1_Act_58cluster] &lt;- &quot;CD27-CD11b+ Activate NK&quot;
+
+#T
+##CD4
+Merge_One_T_CD4_58cluster &lt;- c(1,0,45,57,55,22,6,9,50,27,56,24,51,54,28,3,11,18)
+###naive
+Merge_One_T_CD4_naive_58cluster &lt;- c(6,1,45)
+Merge_One_T_CD4_naive_act_58cluster &lt;- c(9,57,22,50,11,27,55)
+###E memory
+Merge_One_T_CD4_EM_58cluster &lt;- c(0,28,3)
+###Terminally Exhausted
+Merge_One_T_CD4_TE_58cluster &lt;- c(51)
+###effector
+Merge_One_T_CD4_effector_58cluster &lt;- c(18,54,11)
+Merge_One_T_CD4_effector_act_58cluster &lt;- c(24,56)
+
+#levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_58cluster] &lt;- &quot;CD4+ T&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_naive_58cluster] &lt;- &quot;CD4+ naive&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_naive_act_58cluster] &lt;- &quot;CD4+ naive act&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_EM_58cluster] &lt;- &quot;CD4+ EM&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_TE_58cluster] &lt;- &quot;CD4+ TE&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_effector_58cluster] &lt;- &quot;CD4+ effector&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD4_effector_act_58cluster] &lt;- &quot;CD4+ effector act&quot;
+
+##CD8
+Merge_One_T_CD8_58cluster &lt;- c(4,5,38,53,8,2,34)
+###EM
+Merge_One_T_CD8_EM_58cluster &lt;- c(2)
+###EM_act
+Merge_One_T_CD8_EM_act_58cluster &lt;- c(8)
+###E
+Merge_One_T_CD8_E_58cluster &lt;- c(34)
+###Naive
+Merge_One_T_CD8_Naive_58cluster &lt;- c(4,5,53)
+###Naive_act
+Merge_One_T_CD8_Naive_act_58cluster &lt;- c(38)
+
+#levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_58cluster] &lt;- &quot;CD8+ T&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_EM_58cluster] &lt;- &quot;CD8+ EM&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_EM_act_58cluster] &lt;- &quot;CD8+ EM act&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_E_58cluster] &lt;- &quot;CD8+ E&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_Naive_58cluster] &lt;- &quot;CD8+ Naive&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_CD8_Naive_act_58cluster] &lt;- &quot;CD8+ Naive act&quot;
+
+##MAIT_CD8+
+Merge_One_T_MAIT_CD8_58cluster &lt;- c(19,21)
+##MAIT_DN
+Merge_One_T_MAIT_DN_58cluster &lt;- c(25,30)
+##yd
+Merge_One_T_yd_58cluster &lt;- c(12)
+##NKT
+Merge_One_T_NK_58cluster &lt;- c(41)
+##DN
+Merge_One_T_DN_58cluster &lt;- c(35,42)
+##DP
+Merge_One_T_DP_58cluster &lt;- c(32)
+
+
+
+
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_MAIT_CD8_58cluster] &lt;- &quot;MAIT_CD8+&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_MAIT_DN_58cluster] &lt;- &quot;MAIT_DN&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_yd_58cluster] &lt;- &quot;ydT&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_NK_58cluster] &lt;- &quot;NKT&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_DN_58cluster] &lt;- &quot;DN&quot;
+levels(Merge_One_celltype)[levels(Merge_One_celltype) %in% Merge_One_T_DP_58cluster] &lt;- &quot;DP&quot;
+
+
+
+Total_Singlet_PBMC_0407_0410AB@meta.data[[&quot;Merge_One_celltype&quot;]] &lt;- Merge_One_celltype</code></pre>
+<pre class="r"><code>#pdf(&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/One/One_Merge_58cluster_Dimplot.pdf&quot;,width = 22,height = 14)
+DimPlot(Total_Singlet_PBMC_0407_0410AB,reduction = &quot;hwnn.umap&quot;,group.by = &quot;Merge_One_celltype&quot;,label = T,label.size = 2.5,label.box = T,repel = T,raster=FALSE)</code></pre>
+<p><img src="figure/merge_PBMC_0407_0410_DeBatch_annotation.Rmd/unnamed-chunk-58-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#dev.off()</code></pre>
+</div>
+</div>
+<div id="two-hierarchy" class="section level2">
+<h2>Two hierarchy</h2>
+<div id="findallmarker" class="section level3">
+<h3>FindAllMarker</h3>
+<pre class="r"><code>library(future)
+plan(&quot;multicore&quot;)
+Merge_ADT_58clusters.markers &lt;- FindAllMarkers(Total_Singlet_PBMC_0407_0410AB, only.pos = TRUE, min.pct = 0.2, logfc.threshold = 0.2,assay = &quot;ADT&quot;)
+library(tidyverse)
+Merge_ADT_58clusters.markers.list&lt;- Merge_ADT_58clusters.markers %&gt;%
+    group_by(cluster) %&gt;% 
+    filter(p_val_adj&lt;0.05)%&gt;%
+    slice_max(n = 10, order_by = avg_log2FC)
+write.table(Merge_ADT_58clusters.markers.list,&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Merge_ADT_58clusters.markers.list.csv&quot;,row.names=F,col.names=T,sep = &quot;,&quot;)
+
+
+Merge_RNA_58clusters.markers &lt;- FindAllMarkers(Total_Singlet_PBMC_0407_0410AB, only.pos = TRUE, min.pct = 0.2, logfc.threshold = 0.2,assay = &quot;RNA&quot;)
+library(tidyverse)
+Merge_RNA_58clusters.markers.list &lt;- Merge_RNA_58clusters.markers %&gt;%
+    group_by(cluster) %&gt;% 
+    filter(p_val_adj&lt;0.05)%&gt;%
+    slice_max(n = 20, order_by = avg_log2FC)
+head(Merge_RNA_58clusters.markers.list)
+write.table(Merge_RNA_58clusters.markers.list,&quot;/database/jiangxinyu/Result/merge_PBMC_0407_0410_outs/Merge_RNA_58clusters.markers.list.csv&quot;,row.names=F,col.names=T,sep = &quot;,&quot;)</code></pre>
 <br>
 <p>
 <button type="button" class="btn btn-default btn-workflowr btn-workflowr-sessioninfo" data-toggle="collapse" data-target="#workflowr-sessioninfo" style="display: block;">
@@ -1730,6 +2483,7 @@ loaded via a namespace (and not attached):
 </div>
 </div>
 </div>
+</div>
 
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -1780,6 +2534,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {
